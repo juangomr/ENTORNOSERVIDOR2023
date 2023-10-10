@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio3</title>
+  </head>
+  <body>
+    <h1>Formulario</h1>
+    <form action="Ejercicio3.php" method="post">
+      <label for="name">Nombre:</label><br />
+      <input type="text" id="nombre" name="nombre" value="" /><br />
+      <label for="pwd">Contraseña:</label><br />
+      <input
+        type="password"
+        id="contraseña"
+        name="contraseña"
+        value=""
+      /><br /><br />
+      <label for="ed">Educación:</label><br />
+      <select name="educacion">
+        <option value="eo" selected>Educacion obligatoria</option>
+        <option value="sn">Sin estudios</option>
+        <option value="fp">Formación profesional</option>
+        <option value="uni">Universidad</option></select
+      ><br />
+
+      <input type="submit" value="Enviar" />
+    </form>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inmobiliaria Novendona</title>
+    <style>
+      h1 {
+        color: blue;
+      }
+      div {
+        border: 1px solid blue;
+        padding: 8px;
+        border-style: dotted;
+        width: 60%;
+      }
+      label {
+        font-weight: bold;
+      }
+
+      textarea {
+        overflow-y: scroll;
+        resize: none;
+        border-color: lightblue;
+      }
+
+      input {
+        border-color: lightblue;
+      }
+
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td,
+      th {
+        text-align: left;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Inserción de vivienda</h1>
+    <p>Introduzca los datos de la vivienda:</p>
+    <div>
+      <table>
+        <form action="app.php" method="post">
+          <tr>
+            <td>
+              <label for="vivienda">Tipo de vivienda:</label>
+            </td>
+            <td>
+              <select name="tipoVivienda">
+                <option value="piso" selected>Piso</option>
+                <option value="adosado">Adosado</option>
+                <option value="chalet">Chalet</option>
+                <option value="casa">Casa</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="zona">Zona:</label>
+            </td>
+            <td>
+              <select name="tipoZona">
+                <option value="nervion" selected>Nervión</option>
+                <option value="centro">Centro</option>
+                <option value="triana">Triana</option>
+                <option value="aljarafe">Aljarafe</option>
+                <option value="macarena">Macarena</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="direccion">Dirección:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                id="dic"
+                name="dic"
+                placeholder="Avda de la Buhaira"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="dormitorios">Número de dormitorios</label>
+            </td>
+            <td>
+              <input type="radio" id="1" name="dorm" value="1" >1</input>
+              <input type="radio" id="2" name="dorm" value="2" >2</input>
+              <input type="radio" id="3" name="dorm" value="3" >3</input>
+              <input type="radio" id="4" name="dorm" value="4" >4</input>
+              <input type="radio" id="5" name="dorm" value="5" >5</input>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="precio">Precio:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                id="precio"
+                name="precio"
+                placeholder="360000"
+              />
+              €
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="tamaño">Tamaño:</label>
+            </td>
+            <td>
+              <input type="text" id="tamaño" name="tamaño" placeholder="125" />
+              metros cuadrados
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="extras">Extras (marque los que procedan):</label>
+            </td>
+            <td>
+              <input type="checkbox" id="Piscina" name="extras[]" value="Piscina">Piscina</input>
+              <input type="checkbox" id="Jardin" name="extras[]" value="Jardin">Jardin</input>
+              <input type="checkbox" id="Garage" name="extras[]" value="Garage">Garage</input>   
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="observaciones">Observaciones:</label>
+            </td>
+            <td>
+              <textarea
+                id="obs"
+                name="obs"
+                rows="4"
+                cols="50"
+                placeholder="Introduzca aquí una observación"
+              ></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="submit" value="Insertar vivienda" name="insertar"/>
+            </td>
+          </tr>
+        </form>
+      </table>
+    </div>
+  </body>
+</html>
