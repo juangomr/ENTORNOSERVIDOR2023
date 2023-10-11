@@ -1,5 +1,6 @@
 <?php
 $_SERVER["REQUEST_METHOD"] == "POST";
+
 function filtrado($datos)
 {
     $datos = trim($datos); //Elimina los espacios en blanco por los dos lados
@@ -43,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
         $extras = filtrado(implode(", ", $_REQUEST['extras']));
         $obs = filtrado($_REQUEST['obs']);
 
-        echo "<h1 style=color: blue;>Inserción de Vivienda</h1>
+        echo "<h1 style= color:blue>Inserción de Vivienda</h1>
         <p>Estos son los datos introducidos:</p>
 
     <ul>
@@ -64,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
         <li>Observaciones: $obs </li>
 
     </ul>";
+
     } else {
         foreach ($errores as $error) {
             echo "<li>$error</li>";
@@ -71,6 +73,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
     }
 }
 
+/*echo error_reporting(0) . "<br>";
+echo $_FILES['imagen']['name'] . "<br>";
+echo $_FILES['imagen']['tmp_name'] . "<br>";
+echo $_FILES['imagen']['type'] . "<br>";
+echo $_FILES['imagen']['size'] . "<br>";
+echo $_FILES['imagen']['error'] . "<br>";*/
+
+$extensiones = array(0 => 'image/jpg', 1 => 'image/jpeg', 2 => 'image/png');
+$max_tamanyo = 1024 * 1024 * 8;
+$imagen = $_FILES['imagen']['name'];
+
+$FILE = "c:/xampp/htdocs/entornoServidor/APP/app.php";
+
+$ruta_indexphp = dirname(realpath($FILE));
+$ruta_fichero_origen = $_FILES['imagen']['tmp_name'];
+$ruta_nuevo_destino = $ruta_indexphp . '/imagenes/' . $_FILES['imagen']['name'];
+if (in_array($_FILES['imagen']['type'], $extensiones)) {
+    if ($_FILES['imagen']['size'] < $max_tamanyo) {
+        if (move_uploaded_file($ruta_fichero_origen, $ruta_nuevo_destino)) {
+        }
+    }
+}
+
+echo "<img src=imagenes/$imagen />";
 
 
 ?>

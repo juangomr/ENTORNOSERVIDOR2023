@@ -34,11 +34,18 @@
         width: 100%;
       }
 
-      td,
-      th {
+      tr,
+      td {
         text-align: left;
         padding: 8px;
       }
+
+      .upload-screen{
+        border: 1px solid lightblue;
+        padding: 0px;
+
+      }
+
     </style>
   </head>
   <body>
@@ -46,7 +53,7 @@
     <p>Introduzca los datos de la vivienda:</p>
     <div>
       <table>
-        <form action="app.php" method="post">
+        <form action="app.php" method="post" enctype="multipart/form-data">
           <tr>
             <td>
               <label for="vivienda">Tipo de vivienda:</label>
@@ -132,6 +139,17 @@
               <input type="checkbox" id="Garage" name="extras[]" value="Garage">Garage</input>   
             </td>
           </tr>
+         <tr>
+            <td class="upload-screen">
+             
+                <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                <input type="file" name="imagen" />
+                <input type="submit" name="subir-imagen" value="Subir archivo" />
+                
+                
+            </td>
+         </tr>
+         
           <tr>
             <td>
               <label for="observaciones">Observaciones:</label>
