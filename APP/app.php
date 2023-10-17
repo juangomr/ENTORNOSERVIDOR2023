@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
         <li>Observaciones: $obs </li>
 
     </ul>
-    <a style="color: blue" href="app.html">[Insertar otra vivienda]</a>";
+    <a style=color: blue href=app.html>[Insertar otra vivienda]</a>";
     } else {
         foreach ($errores as $error) {
             echo "<li>$error</li>";
