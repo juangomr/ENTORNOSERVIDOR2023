@@ -1,15 +1,27 @@
 <?php
 $_SERVER["REQUEST_METHOD"] == "POST";
-
+//Declaro mis constantes
+const EXTENSIONES = array(0 => 'image/jpg', 1 => 'image/jpeg', 2 => 'image/png');
+const MAX_TAMANYO = 1024 * 1024 * 8;
+//Declaro mis variables
+$imagen = $_FILES['imagen']['name'];
+$FILE = "c:/xampp/htdocs/entornoServidor/APP/app.php";
+$ruta_indexphp = dirname(realpath($FILE));
+$ruta_fichero_origen = $_FILES['imagen']['tmp_name'];
+$ruta_nuevo_destino = $ruta_indexphp .
+    '/imagenes/' . $imagen;
+move_uploaded_file($ruta_fichero_origen, $ruta_nuevo_destino);
+//Función que uso para filtrar los datos introducidos en el formulario
 function filtrado($datos)
 {
     $datos = trim($datos); //Elimina los espacios en blanco por los dos lados
     $datos = stripslashes($datos); //Elimina los \
     $datos = htmlspecialchars($datos); //Traduce caracteres especiales en html
-
     return $datos;
 }
 
+/*Bloque de código donde voy comprobando que se introducen los datos correctos en 
+los campos dirección, precio, tamaño e imagen.*/
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
 
     if (empty($_REQUEST['dic'])) {
@@ -18,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
     }
     if (empty($_REQUEST['precio'])) {
         $errores[] = "El campo precio está vacío";
-
     }
     if (empty($_REQUEST['tamaño'])) {
         $errores[] = "El campo tamaño está vacío";
@@ -26,13 +37,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
     }
     if (!is_numeric($_REQUEST['precio'])) {
         $errores[] = "El campo precio sólo admite valores numericos";
-
     }
     if (!is_numeric($_REQUEST['tamaño'])) {
         $errores[] = "El campo tamaño sólo admite valores numericos";
 
     }
+    if (empty($imagen)) {
+        $errores[] = "El campo imagen está vacío";
+    } else {
+        if (!in_array($_FILES['imagen']['type'], EXTENSIONES)) {
+            $errores[] = "La extensión de la imagen subida no es correcta";
+            if ($_FILES['imagen']['size'] > MAX_TAMANYO) {
+                $errores[] = "El tamaño de la imagen subida es mayor de lo permitido";
+                if (!move_uploaded_file($ruta_fichero_origen, $ruta_nuevo_destino)) {
+                    $errores[] = "La imagen no se ha movido a la carpeta correspondiente";
+                }
+            }
+        }
+    }
 
+    /*Bloque de código que comprueba si el array de errores está vacío, si es así,
+     voy filtrando todos los datos introducidos en el */
     if (empty($errores)) {
 
         $vivienda = filtrado($_REQUEST['tipoVivienda']);
@@ -64,39 +89,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
 
         <li>Observaciones: $obs </li>
 
+        <li>Foto de Vivienda: <img src=imagenes/$imagen /></li>
     </ul>
-    <a style=color: blue href=app.html>[Insertar otra vivienda]</a>";
+
+    <a href=app.html>[Insertar otra vivienda]</a>";
     } else {
         foreach ($errores as $error) {
             echo "<li>$error</li>";
         }
     }
 }
-
-/*echo error_reporting(0) . "<br>";
-echo $_FILES['imagen']['name'] . "<br>";
-echo $_FILES['imagen']['tmp_name'] . "<br>";
-echo $_FILES['imagen']['type'] . "<br>";
-echo $_FILES['imagen']['size'] . "<br>";
-echo $_FILES['imagen']['error'] . "<br>";*/
-
-$extensiones = array(0 => 'image/jpg', 1 => 'image/jpeg', 2 => 'image/png');
-$max_tamanyo = 1024 * 1024 * 8;
-$imagen = $_FILES['imagen']['name'];
-
-$FILE = "c:/xampp/htdocs/entornoServidor/APP/app.php";
-
-$ruta_indexphp = dirname(realpath($FILE));
-$ruta_fichero_origen = $_FILES['imagen']['tmp_name'];
-$ruta_nuevo_destino = $ruta_indexphp . '/imagenes/' . $_FILES['imagen']['name'];
-if (in_array($_FILES['imagen']['type'], $extensiones)) {
-    if ($_FILES['imagen']['size'] < $max_tamanyo) {
-        if (move_uploaded_file($ruta_fichero_origen, $ruta_nuevo_destino)) {
-        }
-    }
-}
-
-echo "<img src=imagenes/$imagen />";
-
-
 ?>
