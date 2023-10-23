@@ -1,16 +1,19 @@
 <?php
-$_SERVER["REQUEST_METHOD"] == "POST";
+
 //Declaro mis constantes
 const EXTENSIONES = array(0 => 'image/jpg', 1 => 'image/jpeg', 2 => 'image/png');
 const MAX_TAMANYO = 1024 * 1024 * 8;
-//Declaro mis variables
-$imagen = $_FILES['imagen']['name'];
+
+
+$imagen = str_replace(" ", "-", $_FILES['imagen']['name']);
 $FILE = "c:/xampp/htdocs/entornoServidor/APP/app.php";
 $ruta_indexphp = dirname(realpath($FILE));
 $ruta_fichero_origen = $_FILES['imagen']['tmp_name'];
 $ruta_nuevo_destino = $ruta_indexphp .
     '/imagenes/' . $imagen;
 move_uploaded_file($ruta_fichero_origen, $ruta_nuevo_destino);
+
+
 //Función que uso para filtrar los datos introducidos en el formulario
 function filtrado($datos)
 {
@@ -26,22 +29,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
 
     if (empty($_REQUEST['dic'])) {
         $errores[] = "El campo dirección está vacío";
-
     }
     if (empty($_REQUEST['precio'])) {
         $errores[] = "El campo precio está vacío";
     }
     if (empty($_REQUEST['tamaño'])) {
         $errores[] = "El campo tamaño está vacío";
-
     }
     if (!is_numeric($_REQUEST['precio'])) {
         $errores[] = "El campo precio sólo admite valores numericos";
     }
     if (!is_numeric($_REQUEST['tamaño'])) {
         $errores[] = "El campo tamaño sólo admite valores numericos";
-
     }
+
+    if (empty($_REQUEST['extras'])) {
+        $errores[] = "El campo extras está vacío";
+    }
+
     if (empty($imagen)) {
         $errores[] = "El campo imagen está vacío";
     } else {
