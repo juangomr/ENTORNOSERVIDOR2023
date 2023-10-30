@@ -47,17 +47,32 @@
       }
 
     </style>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script>
-      
-    </script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(function(){
+      $("#btn_ajax").click(function(){
+  
+      $.ajax({
+        type: "POST",
+        url: "app.php",
+        data: $("#form_ajax").serialize(), //Adjuntar los campos del formulario enviado
+        success: function(data)
+        {
+          $("#mensaje").html(data); // Mostrar las respuestas del script PHP
+        }
+  
+      });
+      return false; // Evita ejecutar el submit del formulario
+    });
+    });
+  </script>
   </head>
   <body>
     <h1>Inserción de vivienda</h1>
     <p>Introduzca los datos de la vivienda:</p>
     <div>
       <table>
-        <form action="app.php" method="post" enctype="multipart/form-data">
+        <form action="app.php" method="post" id="form_ajax" enctype="multipart/form-data">
           <tr>
             <td>
              
@@ -173,7 +188,8 @@
           </tr>
           <tr>
             <td>
-              <input type="submit" value="Insertar vivienda" name="insertar"/>
+              <input type="hidden" name="ajax">
+              <input type="button" value="Insertar vivienda" name="insertar" id="btn_ajax"/>
             </td>
           </tr>
         </form>
