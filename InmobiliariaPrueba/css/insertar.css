@@ -1,0 +1,39 @@
+h1 {
+  color: blue;
+}
+div {
+  border: 1px solid blue;
+  padding: 8px;
+  border-style: dotted;
+  width: 60%;
+}
+label {
+  font-weight: bold;
+}
+
+textarea {
+  overflow-y: scroll;
+  resize: none;
+  border-color: lightblue;
+}
+
+input {
+  border-color: lightblue;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+.upload-screen {
+  border: 1px solid lightblue;
+  padding: 0px;
+}

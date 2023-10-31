@@ -1,0 +1,27 @@
+h1 {
+  color: #0066ff;
+}
+
+table {
+  font-family: arial, sans-serif;
+  width: 100%;
+}
+
+.primera-fila {
+  background-color: #0066ff;
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+}
+
+tr,
+td {
+  border: 1px solid black;
+
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+  text-align: left;
+}
