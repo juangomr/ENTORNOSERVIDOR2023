@@ -1,12 +1,13 @@
 <?php
-$mensaje = null;
+
 //Declaro mis constantes
 const EXTENSIONES = array(0 => 'image/jpg', 1 => 'image/jpeg', 2 => 'image/png');
 const MAX_TAMANYO = 1024 * 1024 * 8;
 
 
 $imagen = str_replace(" ", "-", $_FILES['imagen']['name']);
-$FILE = "c:/xampp/htdocs/entornoServidor/InmobiliariaPrueba/index.php";
+$FILE = "c:/xampp/htdocs/entornoServidor/InmobiliariaPrueba/validacion.php";
+$ruta_imagen = "http://localhost/entornoServidor/InmobiliariaPrueba/imagenes/" . $imagen;
 $ruta_indexphp = dirname(realpath($FILE));
 $ruta_fichero_origen = $_FILES['imagen']['tmp_name'];
 $ruta_nuevo_destino = $ruta_indexphp .
@@ -26,10 +27,10 @@ function filtrado($datos)
 
 /*Bloque de código donde voy comprobando que se introducen los datos correctos en 
 los campos dirección, precio, tamaño e imagen.*/
-if (isset($_POST['ajax'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
 
     if (empty($_REQUEST['dic'])) {
-        $mensaje = "<script>document.getElementById('e_direccion').innerHTML = '* El campo dirección está vacío' ;</script>";
+        $errores[] = "El campo dirección está vacío";
     }
     if (empty($_REQUEST['precio'])) {
         $errores[] = "El campo precio está vacío";
@@ -46,6 +47,7 @@ if (isset($_POST['ajax'])) {
 
     if (empty($_REQUEST['extras'])) {
         $errores[] = "El campo extras está vacío";
+
     }
 
     if (empty($imagen)) {
@@ -96,16 +98,39 @@ if (empty($errores)) {
 
       <li>Observaciones: $obs </li>
 
-      <li>Foto de Vivienda: <img src=imagenes/$imagen /></li>
+      <li>Foto de Vivienda: <a href=$ruta_imagen target=_blank>$imagen</a></li>
   </ul>
 
-  <a href=app.html>[Insertar otra vivienda]</a>";
+  <a href=inicio.php>[Insertar otra vivienda]</a>";
 } else {
     foreach ($errores as $error) {
         echo "<li>$error</li>";
     }
 }
 
+if (isset($_POST['insertar'])) {
+    $vivienda = $_REQUEST['tipoVivienda'];
+    $zona = $_REQUEST['tipoZona'];
+    $direccion = $_REQUEST['dic'];
+    $dormitorios = $_REQUEST['dorm'];
+    $precio = $_REQUEST['precio'];
+    $tamaño = $_REQUEST['tamaño'];
+    $extras = implode(", ", $_REQUEST['extras']);
+    $obs = $_REQUEST['obs'];
+    $imagen = "<a href=$ruta_imagen target=_blank>" . str_replace(" ", "-", $_FILES['imagen']['name'] . "</a>");
 
-echo $mensaje;
+
+    include "conectarBBDD.php";
+    $sql = "INSERT INTO viviendas (tipo, zona, direccion, num_dormitorios, precio, tamano, extras, foto, observaciones) VALUES ('$vivienda', '$zona', '$direccion', '$dormitorios', '$precio', '$tamaño', '$extras', '$obs', '$imagen')";
+    if (mysqli_query($conn, $sql)) {
+        echo "Número de filas insertadas correctamente: ";
+        echo mysqli_affected_rows($conn);
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    mysqli_close($conn);
+
+}
+
 ?>

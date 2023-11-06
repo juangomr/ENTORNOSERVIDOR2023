@@ -1,5 +1,5 @@
 <?php
-$user = "root";
+/*$user = "root";
 $password = "";
 $host = "localhost";
 $db = "lindavista";
@@ -7,10 +7,10 @@ $db = "lindavista";
 $conn = mysqli_connect($host, $user, $password, $db);
 
 if (!$conn) {
-    echo "error conectando a la bbdd";
+    echo "Error conectando a la bbdd";
     exit();
 }
-/*$sql = "INSERT INTO viviendas (id_vivienda, tipo, zona, direccion, num_dormitorios, precio, tamano, extras, foto, observaciones) VALUES (1, 'Piso', 'Macarena', 'Calle Serrano', '4', 100000, 125, 'Piscina', '', '')";
+$sql = "INSERT INTO viviendas (id_vivienda, tipo, zona, direccion, num_dormitorios, precio, tamano, extras, foto, observaciones) VALUES (1, 'Piso', 'Macarena', 'Calle Serrano', '4', 100000, 125, 'Piscina', '', '')";
 
 if (mysqli_query($conn, $sql)) {
     echo "Número de filas insertadas correctamente: ";
@@ -48,6 +48,7 @@ mysqli_close($conn);*/
             <td>Observaciones</td>
         </tr>
         <?php
+        include "conectarBBDD.php";
         $query = "SELECT * FROM viviendas";
         $resultado = mysqli_query($conn, $query);
 
