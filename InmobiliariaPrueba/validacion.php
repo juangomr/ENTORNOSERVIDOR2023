@@ -47,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
 
     if (empty($_REQUEST['extras'])) {
         $errores[] = "El campo extras está vacío";
-
     }
 
     if (empty($imagen)) {
@@ -77,6 +76,7 @@ if (empty($errores)) {
     $tamaño = filtrado($_REQUEST['tamaño']);
     $extras = filtrado(implode(", ", $_REQUEST['extras']));
     $obs = filtrado($_REQUEST['obs']);
+    $imagen = "<a href=$ruta_imagen target=_blank>" . $imagen . "</a>";
 
     echo "<h1 style= color:blue>Inserción de Vivienda</h1>
       <p>Estos son los datos introducidos:</p>
@@ -102,35 +102,19 @@ if (empty($errores)) {
   </ul>
 
   <a href=inicio.php>[Insertar otra vivienda]</a>";
-} else {
-    foreach ($errores as $error) {
-        echo "<li>$error</li>";
-    }
-}
-
-if (isset($_POST['insertar'])) {
-    $vivienda = $_REQUEST['tipoVivienda'];
-    $zona = $_REQUEST['tipoZona'];
-    $direccion = $_REQUEST['dic'];
-    $dormitorios = $_REQUEST['dorm'];
-    $precio = $_REQUEST['precio'];
-    $tamaño = $_REQUEST['tamaño'];
-    $extras = implode(", ", $_REQUEST['extras']);
-    $obs = $_REQUEST['obs'];
-    $imagen = "<a href=$ruta_imagen target=_blank>" . str_replace(" ", "-", $_FILES['imagen']['name'] . "</a>");
-
 
     include "conectarBBDD.php";
-    $sql = "INSERT INTO viviendas (tipo, zona, direccion, num_dormitorios, precio, tamano, extras, foto, observaciones) VALUES ('$vivienda', '$zona', '$direccion', '$dormitorios', '$precio', '$tamaño', '$extras', '$obs', '$imagen')";
+    $sql = "INSERT INTO viviendas (tipo, zona, direccion, num_dormitorios, precio, tamano, extras, foto, observaciones) VALUES ('$vivienda', '$zona', '$direccion', '$dormitorios', '$precio', '$tamaño', '$extras', '$imagen', '$obs')";
     if (mysqli_query($conn, $sql)) {
-        echo "Número de filas insertadas correctamente: ";
-        echo mysqli_affected_rows($conn);
+        mysqli_close($conn);
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 
-    mysqli_close($conn);
-
+} else {
+    foreach ($errores as $error) {
+        echo "<li>$error</li>";
+    }
 }
 
 ?>

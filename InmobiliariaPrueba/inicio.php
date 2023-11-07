@@ -22,7 +22,8 @@
           Vivienda</button>
         <button onclick="window.location.href='bbdd.php'" class="btn btn-outline-dark btn-lg">Consultar
           Vivienda</button>
-        <button class="btn btn-outline-dark btn-lg">Eliminar Vivienda</button>
+        <button onclick="window.location.href='eliminar.php'" class="btn btn-outline-dark btn-lg">Eliminar
+          Vivienda</button>
       </div>
     </div>
 </body>

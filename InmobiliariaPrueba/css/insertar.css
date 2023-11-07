@@ -1,7 +1,16 @@
+body {
+  background-image: url("../imagenes/triangles_pattern.webp");
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+
 h1 {
   color: blue;
 }
 div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid blue;
   padding: 8px;
   border-style: dotted;

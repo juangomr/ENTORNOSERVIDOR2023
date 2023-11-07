@@ -5,17 +5,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inmobiliaria Novendona</title>
-  <link href="css/insertar.css" rel="stylesheet">
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link href="css/insertar.css" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Inserción de vivienda</h1>
-  <h2>Introduzca los datos de la vivienda:</h2>
-  <?php
-  include "conectarBBDD.php";
-  ?>
   <div>
+    <h1>Inserción de vivienda</h1>
+    <h2>Introduzca los datos de la vivienda:</h2>
+    <?php
+    include "conectarBBDD.php";
+    ?>
+
     <table>
       <form action="validacion.php" method="post" id="formulario" enctype="multipart/form-data">
         <tr>
@@ -118,7 +121,10 @@
         <tr>
           <td>
 
-            <input type="submit" value="Insertar vivienda" name="insertar" id="insertar" />
+            <input type="submit" value="Insertar vivienda" name="insertar" id="insertar"
+              class="btn btn-outline-dark btn-lg" />
+            <button onclick="window.location.href='inicio.php'" class="btn btn-outline-dark btn-lg">Volver al
+              inicio</button>
           </td>
         </tr>
       </form>
