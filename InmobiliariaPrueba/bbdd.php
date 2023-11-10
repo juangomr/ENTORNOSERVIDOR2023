@@ -51,9 +51,11 @@ mysqli_close($conn);*/
         </tr>
         <?php
         include "conectarBBDD.php";
+        $num_filas_pagina = 5;
         $query = "SELECT * FROM viviendas";
         $resultado = mysqli_query($conn, $query);
-
+        $num_resultados_total = mysqli_num_rows($resultado);
+        $num_paginas_total = ceil($num_resultados_total / $num_filas_pagina);
         while ($fila = mysqli_fetch_assoc($resultado)) {
             ?>
             <tr>
@@ -95,6 +97,15 @@ mysqli_close($conn);*/
     </table>
     <button onclick="window.location.href='inicio.php'" class="btn btn-outline-dark btn-lg">Volver al
         inicio</button>
+    <?php
+    for ($pagina = 1; $pagina <= $num_paginas_total; $pagina++) {
+        echo "<a href=bbdd.php?page=" . $pagina . ">" . $pagina . "</a>";
+    }
+    ?>
+    <button class="btn btn-outline-dark btn-lg"><a href="">Siguiente</a>
+    </button>
+    <h1>Página </h1>
+    <button class="btn btn-outline-dark btn-lg"><a href="">Anterior</a></button>
 </body>
 
 </html>
