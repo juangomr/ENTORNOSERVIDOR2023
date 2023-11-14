@@ -1,27 +1,25 @@
 <?php
-/*$user = "root";
-$password = "";
-$host = "localhost";
-$db = "lindavista";
-
-$conn = mysqli_connect($host, $user, $password, $db);
-
-if (!$conn) {
-    echo "Error conectando a la bbdd";
-    exit();
+include "conectarBBDD.php";
+$filtro = "";
+$respuesta = "";
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_REQUEST["actualizar"])) {
+    $respuesta = $_POST['vivienda'];
+    if ($respuesta != "todos") {
+        $filtro = " WHERE tipo = '$respuesta'";
+    }
 }
-$sql = "INSERT INTO viviendas (id_vivienda, tipo, zona, direccion, num_dormitorios, precio, tamano, extras, foto, observaciones) VALUES (1, 'Piso', 'Macarena', 'Calle Serrano', '4', 100000, 125, 'Piscina', '', '')";
+$paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+$resultadosPorPagina = 5;
+$inicioFila = ($paginaActual - 1) * $resultadosPorPagina;
 
-if (mysqli_query($conn, $sql)) {
-    echo "Número de filas insertadas correctamente: ";
-    echo mysqli_affected_rows($conn);
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-mysqli_close($conn);*/
+$query = "SELECT * FROM viviendas";
+$resultado = mysqli_query($conn, $query);
+$num_resultados_total = mysqli_num_rows($resultado);
+$num_paginas_total = ceil($num_resultados_total / $resultadosPorPagina);
 
+$query = "SELECT * FROM viviendas " . $filtro . "LIMIT $inicioFila, $resultadosPorPagina";
+$resultado = mysqli_query($conn, $query);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -36,8 +34,26 @@ mysqli_close($conn);*/
 
 <body>
     <h1>Consultar viviendas</h1>
+    <form action="bbdd.php" method="post">
+        <label for="vivienda">Filtrar por: </label>
+        <select name="vivienda">
+            <option value="piso" <?php if ($respuesta == "piso")
+                echo "selected"; ?>>Piso</option>
+            <option value="adosado" <?php if ($respuesta == "adosado")
+                echo "selected"; ?>>Adosado</option>
+            <option value="chalet" <?php if ($respuesta == "chalet")
+                echo "selected"; ?>>Chalet</option>
+            <option value="casa" <?php if ($respuesta == "casa")
+                echo "selected"; ?>>Casa</option>
+            <option value="todos" <?php if ($respuesta == "todos")
+                echo "selected"; ?>>Todos</option>
+        </select>
+        <input type="submit" value="Actualizar" name="actualizar">
+    </form>
     <table>
-        <tr class="primera-fila">
+        <?php
+        if ($resultado->num_rows > 0) {
+            echo " <tr class=primera-fila>
             <td>Id_Vivienda</td>
             <td>Tipo</td>
             <td>Zona</td>
@@ -49,63 +65,81 @@ mysqli_close($conn);*/
             <td>Imágenes de la vivienda</td>
             <td>Observaciones</td>
         </tr>
-        <?php
-        include "conectarBBDD.php";
-        $num_filas_pagina = 5;
-        $query = "SELECT * FROM viviendas";
-        $resultado = mysqli_query($conn, $query);
-        $num_resultados_total = mysqli_num_rows($resultado);
-        $num_paginas_total = ceil($num_resultados_total / $num_filas_pagina);
-        while ($fila = mysqli_fetch_assoc($resultado)) {
-            ?>
-            <tr>
-                <td>
-                    <?php echo $fila['id_vivienda'] ?>
-                </td>
-                <td>
-                    <?php echo $fila['tipo'] ?>
-                </td>
-                <td>
-                    <?php echo $fila['zona'] ?>
-                </td>
-                <td>
-                    <?php echo $fila['direccion'] ?>
-                </td>
-                <td>
-                    <?php echo $fila['num_dormitorios'] ?>
-                </td>
-                <td>
-                    <?php echo $fila['precio'] ?>
-                </td>
-                <td>
-                    <?php echo $fila['tamano'] ?>
-                </td>
-                <td>
-                    <?php echo $fila['extras'] ?>
-                </td>
-                <td>
-                    <?php echo $fila['foto'] ?>
-                </td>
-                <td>
-                    <?php echo $fila['observaciones'] ?>
-                </td>
+        <tr> ";
 
-            </tr>
-            <?php
+            while ($fila = mysqli_fetch_assoc($resultado)) {
+                ?>
+                <tr>
+                    <td>
+                        <?php echo $fila['id_vivienda'] ?>
+                    </td>
+                    <td>
+                        <?php echo $fila['tipo'] ?>
+                    </td>
+                    <td>
+                        <?php echo $fila['zona'] ?>
+                    </td>
+                    <td>
+                        <?php echo $fila['direccion'] ?>
+                    </td>
+                    <td>
+                        <?php echo $fila['num_dormitorios'] ?>
+                    </td>
+                    <td>
+                        <?php echo $fila['precio'] ?>
+                    </td>
+                    <td>
+                        <?php echo $fila['tamano'] ?>
+                    </td>
+                    <td>
+                        <?php echo $fila['extras'] ?>
+                    </td>
+                    <td>
+                        <?php echo $fila['foto'] ?>
+                    </td>
+                    <td>
+                        <?php echo $fila['observaciones'] ?>
+                    </td>
+
+                </tr>
+                <?php
+            }
+            ?>
+        </table>
+
+        <?php
+
+        if ($paginaActual == 1) {
+            $paginaSiguiente = $paginaActual + 1;
+            echo "<a href='?pagina=$paginaSiguiente'>[ Siguiente ]</a>";
+        }
+
+        if ($paginaActual > 1 && $paginaActual <= $num_paginas_total) {
+            $paginaAnterior = $paginaActual - 1;
+            $paginaSiguiente = $paginaActual + 1;
+
+            if ($paginaSiguiente) {
+
+                echo "<a href='?pagina=$paginaAnterior'>[ Anterior ]</a>";
+                echo "<a href='?pagina=$paginaSiguiente'>[ Siguiente ]</a>";
+            } else {
+                echo "<a href='?pagina=$paginaAnterior'>[ Anterior ]</a>";
+            }
+        }
+
+        if ($paginaActual > $num_paginas_total) {
+            $paginaAnterior = $paginaActual - 1;
+            echo "No se encontraron resultados" . "<br>";
+            echo "<a href='?pagina=$paginaAnterior'>[ Anterior ]</a>";
+        }
+        } else {
+            $paginaAnterior = $paginaActual - 1;
+            echo "No se encontraron resultados" . "<br>";
         }
         ?>
-    </table>
-    <button onclick="window.location.href='inicio.php'" class="btn btn-outline-dark btn-lg">Volver al
-        inicio</button>
-    <?php
-    for ($pagina = 1; $pagina <= $num_paginas_total; $pagina++) {
-        echo "<a href=bbdd.php?page=" . $pagina . ">" . $pagina . "</a>";
-    }
-    ?>
-    <button class="btn btn-outline-dark btn-lg"><a href="">Siguiente</a>
-    </button>
-    <h1>Página </h1>
-    <button class="btn btn-outline-dark btn-lg"><a href="">Anterior</a></button>
+
+    <button onclick="window.location.href='inicio.php'" class="btn btn-outline-dark btn-lg">
+        Volver al inicio</button>
 </body>
 
 </html>

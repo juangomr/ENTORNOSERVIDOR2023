@@ -32,11 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
     if (empty($_REQUEST['dic'])) {
         $errores[] = "El campo dirección está vacío";
     }
-    if (empty($_REQUEST['precio'])) {
-        $errores[] = "El campo precio está vacío";
+    if (empty($_REQUEST['precio']) || $_REQUEST['precio'] <= 0) {
+        $errores[] = "El campo precio está vacío o es menor a 0";
     }
-    if (empty($_REQUEST['tamaño'])) {
-        $errores[] = "El campo tamaño está vacío";
+    if (empty($_REQUEST['tamaño']) || $_REQUEST['tamaño'] <= 0) {
+        $errores[] = "El campo tamaño está vacío o es menor a 0";
     }
     if (!is_numeric($_REQUEST['precio'])) {
         $errores[] = "El campo precio sólo admite valores numericos";
@@ -96,10 +96,11 @@ if (empty($errores)) {
 
       <li>Extras: $extras</li>
 
+      <li>Foto de Vivienda: <a href=$ruta_imagen target=_blank>$imagen</a></li>
+      
       <li>Observaciones: $obs </li>
 
-      <li>Foto de Vivienda: <a href=$ruta_imagen target=_blank>$imagen</a></li>
-  </ul>
+      </ul>
 
   <a href=inicio.php>[Insertar otra vivienda]</a>";
 
@@ -115,6 +116,7 @@ if (empty($errores)) {
     foreach ($errores as $error) {
         echo "<li>$error</li>";
     }
+    echo '<a href="insertar.php">Volver al formulario de inserción</a>';
 }
 
 ?>
