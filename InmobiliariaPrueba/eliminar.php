@@ -1,6 +1,6 @@
 <?php
 include "conectarBBDD.php";
-
+//Procesamiento de la eliminación de registros
 $filas_eliminadas = array();
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['eliminar'])) {
@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['eliminar'])) {
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link href="css/bbdd.css" rel="stylesheet">
 </head>
+<!-- Mostrar tabla con registros y checkboxes para eliminación-->
 
 <body>
     <h1>Eliminar registros</h1>
@@ -100,9 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['eliminar'])) {
             ?>
         </table>
         <button type="submit" class="btn btn-outline-dark btn-lg">Eliminar registro</button>
+        <button type="button" onclick="window.location.href='inicio.php';" class="btn btn-outline-dark btn-lg">Volver al
+            inicio</button>
     </form>
-    <button onclick="window.location.href='inicio.php'" class="btn btn-outline-dark btn-lg">Volver al
-        inicio</button>
+
 </body>
 
 </html>

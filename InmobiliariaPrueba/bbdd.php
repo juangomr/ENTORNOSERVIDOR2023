@@ -1,17 +1,24 @@
 <?php
+//Conexión a la base de datos.
 include "conectarBBDD.php";
 $filtro = "";
 $respuesta = "";
+//Filtrado de viviendas según el tipo seleccionado en el formulario
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_REQUEST["actualizar"])) {
     $respuesta = $_POST['vivienda'];
     if ($respuesta != "todos") {
         $filtro = " WHERE tipo = '$respuesta'";
     }
 }
+//Paginación. Aquí se calcula el número de resultados por página
+// y la fila de inicio.
 $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 $resultadosPorPagina = 5;
 $inicioFila = ($paginaActual - 1) * $resultadosPorPagina;
 
+/*Consulta SQL la primera para obtener el número total de 
+resultados y calcular el número total de páginas, y la segunda 
+para obtener los resultados paginados según el filtro aplicado.*/
 $query = "SELECT * FROM viviendas";
 $resultado = mysqli_query($conn, $query);
 $num_resultados_total = mysqli_num_rows($resultado);
@@ -34,9 +41,12 @@ $resultado = mysqli_query($conn, $query);
 
 <body>
     <h1>Consultar viviendas</h1>
+    <!--Formulario de filtrado-->
     <form action="bbdd.php" method="post">
         <label for="vivienda">Filtrar por: </label>
         <select name="vivienda">
+            <option value="todos" <?php if ($respuesta == "todos")
+                echo "selected"; ?>>Todos</option>
             <option value="piso" <?php if ($respuesta == "piso")
                 echo "selected"; ?>>Piso</option>
             <option value="adosado" <?php if ($respuesta == "adosado")
@@ -45,16 +55,15 @@ $resultado = mysqli_query($conn, $query);
                 echo "selected"; ?>>Chalet</option>
             <option value="casa" <?php if ($respuesta == "casa")
                 echo "selected"; ?>>Casa</option>
-            <option value="todos" <?php if ($respuesta == "todos")
-                echo "selected"; ?>>Todos</option>
+
         </select>
         <input type="submit" value="Actualizar" name="actualizar">
     </form>
+    <!--Mostrar los resultados en una tabla-->
     <table>
         <?php
         if ($resultado->num_rows > 0) {
             echo " <tr class=primera-fila>
-            <td>Id_Vivienda</td>
             <td>Tipo</td>
             <td>Zona</td>
             <td>Dirección</td>
@@ -70,9 +79,6 @@ $resultado = mysqli_query($conn, $query);
             while ($fila = mysqli_fetch_assoc($resultado)) {
                 ?>
                 <tr>
-                    <td>
-                        <?php echo $fila['id_vivienda'] ?>
-                    </td>
                     <td>
                         <?php echo $fila['tipo'] ?>
                     </td>
@@ -108,7 +114,7 @@ $resultado = mysqli_query($conn, $query);
         </table>
 
         <?php
-
+        //Lógica de enlaces de paginación
         if ($paginaActual == 1) {
             $paginaSiguiente = $paginaActual + 1;
             echo "<a href='?pagina=$paginaSiguiente'>[ Siguiente ]</a>";
@@ -137,7 +143,7 @@ $resultado = mysqli_query($conn, $query);
             echo "No se encontraron resultados" . "<br>";
         }
         ?>
-
+    <!--Botón para volver a la página principal-->
     <button onclick="window.location.href='inicio.php'" class="btn btn-outline-dark btn-lg">
         Volver al inicio</button>
 </body>

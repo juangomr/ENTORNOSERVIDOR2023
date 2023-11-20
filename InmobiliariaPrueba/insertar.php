@@ -16,9 +16,10 @@
     <h1>Inserción de vivienda</h1>
     <h2>Introduzca los datos de la vivienda:</h2>
     <?php
+    //Conexión a la base de datos.
     include "conectarBBDD.php";
     ?>
-
+    <!--Formulario de inserción de vivienda -->
     <table>
       <form action="validacion.php" method="post" id="formulario" enctype="multipart/form-data">
         <tr>
@@ -104,6 +105,7 @@
           </td>
         </tr>
         <tr>
+          <!--Campo para cargar la imagen-->
           <td class="upload-screen">
             <input type="file" name="imagen" />
             <input type="submit" name="subir-imagen" value="Subir archivo" />
@@ -120,7 +122,7 @@
         </tr>
         <tr>
           <td>
-
+            <!--Botones para enviar el formulario y volver al inicio -->
             <input type="submit" value="Insertar vivienda" name="insertar" id="insertar"
               class="btn btn-outline-dark btn-lg" />
             <button onclick="window.location.href='inicio.php'" class="btn btn-outline-dark btn-lg">Volver al

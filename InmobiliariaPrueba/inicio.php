@@ -11,12 +11,13 @@
 </head>
 
 <body>
-
+  <!--Cuerpo de la tarjeta utilizada de Bootstrap para presentar la información sobre el inicio -->
   <div class="card">
     <img src="imagenes/logo.jpg" class="card-img-top" alt="logotipo" />
     <div class="card-body">
       <h1 class="card-title">Inicio</h1>
       <p class="card-text">Opciones de navegación</p>
+      <!--Botones de opciones de navegación -->
       <div class="d-grid gap-2">
         <button onclick="window.location.href='insertar.php'" class="btn btn-outline-dark btn-lg">Insertar
           Vivienda</button>

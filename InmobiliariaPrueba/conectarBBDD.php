@@ -1,4 +1,6 @@
 <?php
+/*Código que se encarga de establecer una conexión a una base de datos
+usando la extensión mysqli*/
 $user = "root";
 $password = "";
 $host = "localhost";
