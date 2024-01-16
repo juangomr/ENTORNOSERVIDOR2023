@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.UlMenuTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+  padding-right: 3.5em;
+  padding-left: 3.5em;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: small;
+  background-color: #282424;
+  height: 15vh;
+  margin: 0;
+}
+
+.push-right {
+  margin-left: auto;
+  list-style: none;
+}
+
+.listasMenuTop {
+  list-style: none;
+}
+
+.enlacesMenuTop {
+  text-align: center;
+  text-decoration: none;
+  color: #8a8788;
+  border-left: 1px solid #8a8788;
+  padding-left: 1em;
+}
+
+.sinBarraVertical {
+  border-left: none;
+  text-decoration: none;
+  color: #8a8788;
+}
+
+.conBarraVerticalDerecha {
+  text-decoration: none;
+  color: #8a8788;
+  border-right: 1px solid #8a8788;
+  border-left: 1px solid #8a8788;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.carrito {
+  width: 3em;
+  height: 3em;
+  position: relative;
+  outline: none;
+}
+
+.carro {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 9rem;
+  height: 9rem;
+}
+
+li a {
+  text-align: center;
+  text-decoration: none;
+  color: #8a8788;
+}
+
+li a:hover {
+  color: tomato;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #8a8788;
+  color: white;
+  text-align: left;
+}
+
+.lupa {
+  width: 1em;
+  height: 1em;
+  position: relative;
+  margin-left: 0.5rem;
+}
+
+.buscador {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: center;
+}
+
+.categorias {
+  grid-column: 1 /2;
+  grid-row: 2 / span 2;
+}
+.productos {
+  grid-column: 2 / span 3;
+  grid-row: 2 / span 2;
+  padding: 2rem;
+}
+.contenedorProductos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.item {
+  width: calc(92% / 3);
+  margin: 1%;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.24);
+}
+.item img {
+  width: 50%;
+  height: 70%;
+}
+.titulo {
+  font-size: 2em;
+  width: 100%;
+}
+.tituloProducto {
+  display: flex;
+  justify-content: center;
+}
+.tituloProducto h1 {
+  font-size: 2rem;
+}
+.botones {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+section {
+  background-image: url(../imagenes/triangles_pattern.webp);
+}
