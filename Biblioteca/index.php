@@ -18,7 +18,7 @@
             <ul class="UlMenuTop ">
                 <img class="logo" src="imagenes/logoBiblioteca-removebg-preview.png">
                 <li class="listasMenuTop"><a class="sinBarraVertical" href="#">Biblioteca</a></li>
-                <li class="listasMenuTop"><a class="enlacesMenuTop" href="#">Libros</a></li>
+                <li class="listasMenuTop"><a class="enlacesMenuTop" href="insertarLibro.php">Libros</a></li>
                 <li class="push-right"><a class="sinBarraVertical" href="#">INICIAR SESION</a></li>
                 <li class="listasMenuTop"><a class="conBarraVerticalDerecha" href="#">REGISTRARSE</a></li>
                 <div class="carro">

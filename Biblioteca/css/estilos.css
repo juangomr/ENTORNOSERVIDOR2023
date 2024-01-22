@@ -156,3 +156,7 @@ input {
 section {
   background-image: url(../imagenes/triangles_pattern.webp);
 }
+
+.table {
+  background-color: transparent;
+}

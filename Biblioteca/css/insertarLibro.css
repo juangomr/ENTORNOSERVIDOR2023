@@ -1,0 +1,37 @@
+body {
+  background-image: url("../imagenes/triangles_pattern.webp");
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+
+label {
+  font-weight: bold;
+  text-align: left;
+}
+input {
+  margin-bottom: 1rem;
+}
+textarea {
+  overflow-y: scroll;
+  resize: none;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.titulo {
+  color: black;
+  font-style: italic;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.precio {
+  margin: 0;
+}
+
+.btn-success {
+  margin-top: 1rem;
+}
