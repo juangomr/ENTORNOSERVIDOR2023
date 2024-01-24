@@ -93,10 +93,8 @@ if (empty($errores)) {
     }
     echo '<a href="insertar.php">Volver al formulario de inserción</a>';
 }
-include "conectarBBDD.php";
 
-$query = "SELECT * FROM libros";
-$resultado = mysqli_query($conn, $query);
+
 ?>
 
 <!DOCTYPE html>
@@ -117,10 +115,10 @@ $resultado = mysqli_query($conn, $query);
         <nav>
             <ul class="UlMenuTop ">
                 <img class="logo" src="imagenes/logoBiblioteca-removebg-preview.png">
-                <li class="listasMenuTop"><a class="sinBarraVertical" href="#">Biblioteca</a></li>
+                <li class="listasMenuTop"><a class="sinBarraVertical" href="index.php">Biblioteca</a></li>
                 <li class="listasMenuTop"><a class="enlacesMenuTop" href="insertarLibro.php">Libros</a></li>
-                <li class="push-right"><a class="sinBarraVertical" href="#">INICIAR SESION</a></li>
-                <li class="listasMenuTop"><a class="conBarraVerticalDerecha" href="#">REGISTRARSE</a></li>
+                <li class="push-right"><a class="sinBarraVertical" href="inicioSesion.php">INICIAR SESION</a></li>
+                <li class="listasMenuTop"><a class="conBarraVerticalDerecha" href="registro.php">REGISTRARSE</a></li>
                 <div class="carro">
                     <img class="carrito" src="imagenes/carrito-removebg-preview.png">
                     <li class="listasMenuTop"><a class="sinBarraVertical" href="#">CARRITO (0)</a></li>
@@ -137,6 +135,7 @@ $resultado = mysqli_query($conn, $query);
     </header>
     <section>
         <h1>Libros Existentes</h1>
+
         <table class="table">
             <thead>
                 <tr>
@@ -151,7 +150,10 @@ $resultado = mysqli_query($conn, $query);
             </thead>
             <tbody>
                 <?php
-                while ($fila = mysqli_fetch_assoc($resultado)) {
+                include "conectarBBDD.php";
+                $query = "SELECT * FROM libros";
+                $resultado = mysqli_query($conn, $query);
+                while ($fila = $resultado->fetch_assoc()) {
                     ?>
                     <tr>
                         <td>
@@ -176,7 +178,6 @@ $resultado = mysqli_query($conn, $query);
                             <?php echo $fila['precio'] ?>€
                         </td>
 
-
                     </tr>
                     <?php
                 }
@@ -184,6 +185,8 @@ $resultado = mysqli_query($conn, $query);
             </tbody>
         </table>
         <button onclick="window.location.href='insertarLibro.php'" class="btn btn-success btn-lg">Nuevo
+            libro</button>
+        <button onclick="window.location.href='eliminarLibro.php'" class="btn btn-danger btn-lg">Eliminar
             libro</button>
     </section>
 </body>

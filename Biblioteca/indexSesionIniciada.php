@@ -8,7 +8,9 @@
     <link href="css/estilos.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -19,8 +21,13 @@
                 <img class="logo" src="imagenes/logoBiblioteca-removebg-preview.png">
                 <li class="listasMenuTop"><a class="sinBarraVertical" href="#">Biblioteca</a></li>
                 <li class="listasMenuTop"><a class="enlacesMenuTop" href="insertarLibro.php">Libros</a></li>
-                <li class="push-right"><a class="sinBarraVertical" href="inicioSesion.php">INICIAR SESION</a></li>
-                <li class="listasMenuTop"><a class="conBarraVerticalDerecha" href="registro.php">REGISTRARSE</a></li>
+                <?php
+                session_start(); ?>
+                <li class="push-right">Bienvenido,
+                    <i class="fa-solid fa-user"></i>
+                    <?php echo $_SESSION['usuario'] ?>
+                </li>
+                <li class="listasMenuTop"><a class="enlacesMenuTop" href="cerrarSesion.php">Cerrar Sesión</a></li>
                 <div class="carro">
                     <img class="carrito" src="imagenes/carrito-removebg-preview.png">
                     <li class="listasMenuTop"><a class="sinBarraVertical" href="#">CARRITO (0)</a></li>

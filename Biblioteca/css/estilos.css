@@ -21,6 +21,8 @@
 .push-right {
   margin-left: auto;
   list-style: none;
+  color: white;
+  font-style: italic;
 }
 
 .listasMenuTop {
@@ -153,10 +155,14 @@ input {
   gap: 2rem;
   margin-bottom: 1rem;
 }
-section {
+body {
   background-image: url(../imagenes/triangles_pattern.webp);
 }
 
 .table {
   background-color: transparent;
+}
+
+section h1 {
+  text-align: center;
 }

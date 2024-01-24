@@ -9,14 +9,29 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 18rem;
+  width: 500px !important;
   border: 2px solid black;
+  border-radius: 20px;
 }
 
-button {
-  margin: 15px;
-}
 img {
   width: 100px;
   height: 200px;
+}
+
+.btn,
+a {
+  margin-top: 1rem;
+}
+
+.alerta {
+  text-align: center;
+  font-style: italic;
+  color: red;
+}
+
+.exito {
+  text-align: center;
+  font-style: italic;
+  color: green;
 }
