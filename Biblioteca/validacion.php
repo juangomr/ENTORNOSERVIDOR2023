@@ -76,7 +76,7 @@ if (empty($errores)) {
     $editorial = filtrado($_REQUEST['editorial']);
     $fecha = filtrado($_REQUEST['fecha']);
     $genero = filtrado($_REQUEST['genero']);
-    $imagen = "<a href=$ruta_imagen target=_blank>" . $imagen . "</a>";
+    //  $imagen = "<a href=$ruta_imagen target=_blank>" . $imagen . "</a>";
 
 
     include "conectarBBDD.php";

@@ -25,12 +25,12 @@
                 session_start(); ?>
                 <li class="push-right">Bienvenido,
                     <i class="fa-solid fa-user"></i>
-                    <?php echo $_SESSION['usuario'] ?>
+                    <?php echo $_SESSION['nombreUsuario'] ?>
                 </li>
                 <li class="listasMenuTop"><a class="enlacesMenuTop" href="cerrarSesion.php">Cerrar Sesión</a></li>
                 <div class="carro">
                     <img class="carrito" src="imagenes/carrito-removebg-preview.png">
-                    <li class="listasMenuTop"><a class="sinBarraVertical" href="#">CARRITO (0)</a></li>
+                    <li class="listasMenuTop"><a class="sinBarraVertical" href="carrito.php">CARRITO (0)</a></li>
                 </div>
                 <div class="buscador">
                     <form>
@@ -42,101 +42,62 @@
         </nav>
 
     </header>
-    <main>
-        <section>
-            <div class="productos">
-                <div class="tituloProducto">
-                    <h1>Libros</h1>
-                </div>
-                <div class="contenedorProductos">
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/08/02/blogs-book-2646768_1280.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/07/57/blogs-fashion-2646759_640.png"
-                            alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/09/01/08/43/moms-entrepreneurs-2703456_1280.png"
-                            alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/07/36/software-2646725_640.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/09/01/08/42/book-cover-2703451_640.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/08/19/blogs-marketing-2646804_640.png"
-                            alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/07/54/software-2646757_640.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/09/01/08/41/book-cover-2703449_640.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/08/26/blogs-guys-2646819_640.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="container">
+        <div class="products">
 
-    </main>
+            <h1 class="heading">Últimos libros</h1>
+
+            <div class="box-container">
+
+                <?php
+                include "conectarBBDD.php";
+                $consulta = mysqli_query($conn, "SELECT * FROM libros");
+                if (mysqli_num_rows($consulta) > 0) {
+                    while ($resultado = mysqli_fetch_assoc($consulta)) {
+                        ?>
+                        <form method="post" class="box" action="carrito.php">
+                            <p class="name">
+                                <?php echo $resultado['descripcion']; ?>
+                            </p>
+                            <img src="imagenes/<?php echo $resultado['imagen']; ?>" alt="" />
+                            <p class="autor">
+                                <strong>Autor:</strong>
+                                <?php echo $resultado['autor']; ?>
+                            </p>
+                            <p class="descripcion">
+                                <strong>Editorial:</strong>
+                                <?php echo $resultado['editorial']; ?>
+                            </p>
+                            <p class="descripcion">
+                                <strong> Género literario:</strong>
+                                <?php echo $resultado['genero']; ?>
+                            </p>
+                            <p class="descripcion">
+                                <strong>Fecha Publicación:</strong>
+                                <?php echo $resultado['fecha_publicacion']; ?>
+                            </p>
+                            <p class="price">
+
+                                <?php echo $resultado['precio']; ?>€
+                            </p>
+                            <input type="number" min="1" name="product_quantity" value="1">
+                            <input type="hidden" name="product_image" value="<?php echo $resultado['imagen']; ?>">
+                            <input type="hidden" name="product_name" value="<?php echo $resultado['descripcion']; ?>">
+                            <input type="hidden" name="product_price" value="<?php echo $resultado['precio']; ?>">
+                            <div class="botones">
+                                <input type="submit" class="btn btn-primary" name="agregarCarrito" value="Agregar al carrito">
+                                <input type="submit" class="btn btn-danger" name="eliminarCarrito" value="Eliminar del carrito">
+
+                            </div>
+                        </form>
+                        <?php
+                    }
+                }
+                ?>
+            </div>
+
+        </div>
+
+    </div>
 
 </body>

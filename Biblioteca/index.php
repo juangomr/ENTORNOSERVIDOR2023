@@ -8,7 +8,9 @@
     <link href="css/estilos.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -23,7 +25,9 @@
                 <li class="listasMenuTop"><a class="conBarraVerticalDerecha" href="registro.php">REGISTRARSE</a></li>
                 <div class="carro">
                     <img class="carrito" src="imagenes/carrito-removebg-preview.png">
-                    <li class="listasMenuTop"><a class="sinBarraVertical" href="#">CARRITO (0)</a></li>
+                    <li class="listasMenuTop"><a class="sinBarraVertical" data-bs-toggle="modal"
+                            data-bs-target="#modal_cart">CARRITO
+                        </a></li>
                 </div>
                 <div class="buscador">
                     <form>
@@ -35,101 +39,78 @@
         </nav>
 
     </header>
-    <main>
-        <section>
-            <div class="productos">
-                <div class="tituloProducto">
-                    <h1>Libros</h1>
+    <div class="container">
+        <div class="products">
+
+            <h1 class="heading">Últimos libros</h1>
+
+            <div class="box-container">
+
+                <?php
+                include "conectarBBDD.php";
+                $consulta = mysqli_query($conn, "SELECT * FROM libros");
+                if (mysqli_num_rows($consulta) > 0) {
+                    while ($resultado = mysqli_fetch_assoc($consulta)) {
+                        ?>
+                        <div class="box">
+                            <p class="name">
+                                <?php echo $resultado['descripcion']; ?>
+                            </p>
+                            <img src="imagenes/<?php echo $resultado['imagen']; ?>" alt="" />
+                            <p class="autor">
+                                <strong>Autor:</strong>
+                                <?php echo $resultado['autor']; ?>
+                            </p>
+                            <p class="descripcion">
+                                <strong>Editorial:</strong>
+                                <?php echo $resultado['editorial']; ?>
+                            </p>
+                            <p class="descripcion">
+                                <strong> Género literario:</strong>
+                                <?php echo $resultado['genero']; ?>
+                            </p>
+                            <p class="descripcion">
+                                <strong>Fecha Publicación:</strong>
+                                <?php echo $resultado['fecha_publicacion']; ?>
+                            </p>
+                            <p class="price">
+
+                                <?php echo $resultado['precio']; ?>€
+                            </p>
+
+                            <div class="botones">
+                                <button type="button" class="btn btn-primary" name="agregarCarrito">Agregar al carrito</button>
+                                <button type="button" class="btn btn-danger" name="eliminarCarrito">Eliminar del
+                                    carrito</button>
+
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="modal_cart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="contenedorProductos">
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/08/02/blogs-book-2646768_1280.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/07/57/blogs-fashion-2646759_640.png"
-                            alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/09/01/08/43/moms-entrepreneurs-2703456_1280.png"
-                            alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/07/36/software-2646725_640.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/09/01/08/42/book-cover-2703451_640.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/08/19/blogs-marketing-2646804_640.png"
-                            alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/07/54/software-2646757_640.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/09/01/08/41/book-cover-2703449_640.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <p class="titulo">Título</p>
-                        <img src="https://cdn.pixabay.com/photo/2017/08/16/08/26/blogs-guys-2646819_640.png" alt="" />
-                        <p class="descripcion">Lorem ipsum et dolor sumu</p>
-                        <div class="botones">
-                            <button type="button" class="btn btn-primary">Agregar al carrito</button>
-                            <button type="button" class="btn btn-success">Eliminar del carrito</button>
-                        </div>
-                    </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
-        </section>
-
-    </main>
+        </div>
+    </div>
 
 </body>

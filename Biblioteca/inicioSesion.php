@@ -18,8 +18,9 @@ if (isset($_POST['inicioSesion'])) {
     $fila = mysqli_fetch_array($resultado);
 
     if ($fila['tipoUsuario'] == 'Admin') {
+      $_SESSION['idUsuario'] = $fila['idUsuario'];
       $_SESSION['nombreAdmin'] = $fila['nombreUsuario'];
-      header("refresh:2;url=registro.php"); ?>
+      header("refresh:2;url=indexSesionIniciada.php"); ?>
       <!DOCTYPE html>
       <html lang="es">
 
@@ -42,7 +43,8 @@ if (isset($_POST['inicioSesion'])) {
             <h1>SESIÓN EFECTUADA CORRECTAMENTE!, Bienvenid@ Admin:
               <?php echo $_SESSION['nombreAdmin'] ?>
             </h1>
-            <p>En breves le redireccionaremos a la página. Si tarda demasiado <a href="index.php">Pulse aquí</a></p>
+            <p>En breves le redireccionaremos a la página. Si tarda demasiado <a href="indexSesionIniciada.php">Pulse aquí</a>
+            </p>
           </form>
         </div>
 
@@ -52,8 +54,9 @@ if (isset($_POST['inicioSesion'])) {
 
       <?php
     } elseif ($fila['tipoUsuario'] == 'Usuario') {
+      $_SESSION['idUsuario'] = $fila['idUsuario'];
       $_SESSION['nombreUsuario'] = $fila['nombreUsuario'];
-      header("refresh:2;url=index.php"); ?>
+      header("refresh:2;url=indexSesionIniciada.php"); ?>
       <!DOCTYPE html>
       <html lang="es">
 
@@ -74,9 +77,11 @@ if (isset($_POST['inicioSesion'])) {
               alt="logotipo" />
 
             <h1>SESIÓN EFECTUADA CORRECTAMENTE!,Bienvenid@ Usuario:
+
               <?php echo $_SESSION['nombreUsuario'] ?>
             </h1>
-            <p>En breves le redireccionaremos a la página. Si tarda demasiado <a href="index.php">Pulse aquí</a></p>
+            <p>En breves le redireccionaremos a la página. Si tarda demasiado <a href="indexSesionIniciada.php">Pulse aquí</a>
+            </p>
           </form>
         </div>
 
