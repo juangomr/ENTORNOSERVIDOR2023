@@ -25,6 +25,7 @@
             <p class="card-text">¡Has cerrado sesión con éxito!</p>
 
             <?php  // Destruye la sesión
+            session_unset();
             session_destroy();
 
             // Redirige a la página deseada después de un breve periodo de tiempo (por ejemplo, 2 segundos)
