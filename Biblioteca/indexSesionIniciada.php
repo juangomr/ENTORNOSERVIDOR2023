@@ -19,7 +19,7 @@
         <nav>
             <ul class="UlMenuTop ">
                 <img class="logo" src="imagenes/logoBiblioteca-removebg-preview.png">
-                <li class="listasMenuTop"><a class="sinBarraVertical" href="#">Biblioteca</a></li>
+                <li class="listasMenuTop"><a class="sinBarraVertical" href="indexSesionIniciada.php">Biblioteca</a></li>
                 <li class="listasMenuTop"><a class="enlacesMenuTop" href="insertarLibro.php">Libros</a></li>
                 <?php
                 session_start(); ?>
@@ -30,8 +30,13 @@
                 <li class="listasMenuTop"><a class="enlacesMenuTop" href="cerrarSesion.php">Cerrar Sesión</a></li>
                 <div class="carro">
                     <img class="carrito" src="imagenes/carrito-removebg-preview.png">
-                    <li class="listasMenuTop"><a class="sinBarraVertical" href="carrito.php">CARRITO (0)</a></li>
+                    <li class="listasMenuTop"><a class="sinBarraVertical" href="carrito.php">CARRITO
+                        </a>
+
+                    </li>
                 </div>
+                <li style="color: white; font-weigth: bold;" class="listasMenuTop" id="cant"></li>
+
                 <div class="buscador">
                     <form>
                         <input type="text" placeholder="Buscar productos..." />
@@ -43,11 +48,11 @@
 
     </header>
     <div class="container">
-        <div class="products">
+        <div class="libros">
 
-            <h1 class="heading">Últimos libros</h1>
+            <h1 class="titulo">Últimos libros</h1>
 
-            <div class="box-container">
+            <div class="contenedorLibros">
 
                 <?php
                 include "conectarBBDD.php";
@@ -55,8 +60,8 @@
                 if (mysqli_num_rows($consulta) > 0) {
                     while ($resultado = mysqli_fetch_assoc($consulta)) {
                         ?>
-                        <form method="post" class="box" action="carrito.php">
-                            <p class="name">
+                        <div method="post" class="cajaLibros" action="">
+                            <p class="nombre">
                                 <?php echo $resultado['descripcion']; ?>
                             </p>
                             <img src="imagenes/<?php echo $resultado['imagen']; ?>" alt="" />
@@ -76,20 +81,27 @@
                                 <strong>Fecha Publicación:</strong>
                                 <?php echo $resultado['fecha_publicacion']; ?>
                             </p>
-                            <p class="price">
-
+                            <p class="precio">
                                 <?php echo $resultado['precio']; ?>€
                             </p>
-                            <input type="number" min="1" name="product_quantity" value="1">
-                            <input type="hidden" name="product_image" value="<?php echo $resultado['imagen']; ?>">
-                            <input type="hidden" name="product_name" value="<?php echo $resultado['descripcion']; ?>">
-                            <input type="hidden" name="product_price" value="<?php echo $resultado['precio']; ?>">
-                            <div class="botones">
-                                <input type="submit" class="btn btn-primary" name="agregarCarrito" value="Agregar al carrito">
-                                <input type="submit" class="btn btn-danger" name="eliminarCarrito" value="Eliminar del carrito">
+                            <form action="" method="post">
+                                <input type="number" min="1" name="product_quantity" value="1">
+                                <input type="hidden" name="product_image" value="<?php echo $resultado['imagen']; ?>">
+                                <input type="hidden" name="product_name" value="<?php echo $resultado['descripcion']; ?>">
+                                <input type="hidden" name="product_price" value="<?php echo $resultado['precio']; ?>">
+                                <div class="botones">
+                                    <button class="btn btn-warning btn-sm" name="anadir" id="anadir"
+                                        onclick="agregarAlCarrito()">Añadir al Carrito
+                                    </button>
+                                    <input type="hidden" class="btn btn-primary btn-sm" name="agregarCarrito"
+                                        value="Comprar Ahora">
+                                    <input type="submit" class="btn btn-primary btn-sm" name="agregarCarrito">
 
-                            </div>
-                        </form>
+                                    <input type="reset" class="btn btn-danger btn-sm" name="eliminarCarrito"
+                                        value="Eliminar del carrito">
+                                </div>
+                            </form>
+                        </div>
                         <?php
                     }
                 }
@@ -99,5 +111,15 @@
         </div>
 
     </div>
+    <script>
+        function agregarAlCarrito() {
+            // Obtener el elemento con el ID "cant"
+            let cantidadElemento = document.getElementById('cant');
 
+            // Incrementar la cantidad en 1
+            let cantidadActual = parseInt(cantidadElemento.innerText) || 0; // Si no hay número, se establece como 0
+            cantidadActual++;
+            cantidadElemento.innerHTML = "<p style=margin-bottom:0px;>" + cantidadActual + " Articulo/s en carrito</p>";
+        }
+    </script>
 </body>

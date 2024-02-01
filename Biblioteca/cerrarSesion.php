@@ -18,9 +18,7 @@
         <img src="imagenes/Captura_de_pantalla_2024-01-24_152316-removebg-preview.png" class="card-img-top"
             alt="logotipo" />
         <div class="card-body">
-            <h1 class="card-title">Hasta luego,
-                <?php $_SESSION['usuario']; ?>
-            </h1>
+            <h1 class="card-title">Hasta luego</h1>
 
             <p class="card-text">¡Has cerrado sesión con éxito!</p>
 
