@@ -32,11 +32,8 @@
                     <img class="carrito" src="imagenes/carrito-removebg-preview.png">
                     <li class="listasMenuTop"><a class="sinBarraVertical" href="carrito.php">CARRITO
                         </a>
-
                     </li>
                 </div>
-                <li style="color: white; font-weigth: bold;" class="listasMenuTop" id="cant"></li>
-
                 <div class="buscador">
                     <form>
                         <input type="text" placeholder="Buscar productos..." />
@@ -60,7 +57,7 @@
                 if (mysqli_num_rows($consulta) > 0) {
                     while ($resultado = mysqli_fetch_assoc($consulta)) {
                         ?>
-                        <div method="post" class="cajaLibros" action="">
+                        <div class="cajaLibros">
                             <p class="nombre">
                                 <?php echo $resultado['descripcion']; ?>
                             </p>
@@ -84,21 +81,14 @@
                             <p class="precio">
                                 <?php echo $resultado['precio']; ?>€
                             </p>
-                            <form action="" method="post">
-                                <input type="number" min="1" name="product_quantity" value="1">
-                                <input type="hidden" name="product_image" value="<?php echo $resultado['imagen']; ?>">
-                                <input type="hidden" name="product_name" value="<?php echo $resultado['descripcion']; ?>">
-                                <input type="hidden" name="product_price" value="<?php echo $resultado['precio']; ?>">
+                            <form action="carrito.php" method="post">
+                                <input type="number" min="1" name="cantidadLibro" value="1">
+                                <input type="hidden" name="imagenLibro" value="<?php echo $resultado['imagen']; ?>">
+                                <input type="hidden" name="nombreLibro" value="<?php echo $resultado['descripcion']; ?>">
+                                <input type="hidden" name="precioLibro" value="<?php echo $resultado['precio']; ?>">
                                 <div class="botones">
-                                    <button class="btn btn-warning btn-sm" name="anadir" id="anadir"
-                                        onclick="agregarAlCarrito()">Añadir al Carrito
-                                    </button>
-                                    <input type="hidden" class="btn btn-primary btn-sm" name="agregarCarrito"
-                                        value="Comprar Ahora">
-                                    <input type="submit" class="btn btn-primary btn-sm" name="agregarCarrito">
-
-                                    <input type="reset" class="btn btn-danger btn-sm" name="eliminarCarrito"
-                                        value="Eliminar del carrito">
+                                    <input type="submit" class="btn btn-primary btn-lg" name="agregarCarrito"
+                                        value="Añadir al carrito">
                                 </div>
                             </form>
                         </div>
@@ -111,15 +101,5 @@
         </div>
 
     </div>
-    <script>
-        function agregarAlCarrito() {
-            // Obtener el elemento con el ID "cant"
-            let cantidadElemento = document.getElementById('cant');
 
-            // Incrementar la cantidad en 1
-            let cantidadActual = parseInt(cantidadElemento.innerText) || 0; // Si no hay número, se establece como 0
-            cantidadActual++;
-            cantidadElemento.innerHTML = "<p style=margin-bottom:0px;>" + cantidadActual + " Articulo/s en carrito</p>";
-        }
-    </script>
 </body>

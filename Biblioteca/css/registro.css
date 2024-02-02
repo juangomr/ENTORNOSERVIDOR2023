@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .contenedorFormulario {
   min-height: 100vh;
   display: flex;
@@ -61,4 +66,26 @@ img {
   background: crimson;
   color: #fff;
   font-size: 20px;
+}
+
+.contenedorPedido {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background: #eee;
+}
+
+.contenedorPedido img {
+  height: 300px;
+  width: 300px;
+}
+
+.pedido {
+  border: 1px solid black;
+  padding: 2rem;
+  background-color: #fff;
+  margin-bottom: 1rem;
 }

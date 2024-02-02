@@ -2,43 +2,38 @@
 include("conectarBBDD.php");
 session_start();
 
-$user_id = $_SESSION['idUsuario'];
+$idUsuario = $_SESSION['idUsuario'];
 
 if (isset($_POST['agregarCarrito'])) {
 
-    $product_name = $_POST['product_name'];
-    $product_price = $_POST['product_price'];
-    $product_image = $_POST['product_image'];
-    $product_quantity = $_POST['product_quantity'];
+    $nombreLibro = $_POST['nombreLibro'];
+    $precioLibro = $_POST['precioLibro'];
+    $imagenLibro = $_POST['imagenLibro'];
+    $cantidadLibro = $_POST['cantidadLibro'];
+    $fechaPedido = date("Y-m-d");
+    $query = mysqli_query($conn, "SELECT * FROM `carrito` WHERE nombre = '$nombreLibro' AND idUsuario = '$idUsuario'") or die('query failed');
 
-    $select_cart = mysqli_query($conn, "SELECT * FROM `carrito` WHERE nombre = '$product_name' AND idUsuario = '$user_id'") or die('query failed');
-
-    if (mysqli_num_rows($select_cart) > 0) {
-        $message[] = 'product already added to cart!';
+    if (mysqli_num_rows($query) > 0) {
     } else {
-        mysqli_query($conn, "INSERT INTO `carrito`(idUsuario, nombre, precio, imagen, cantidad) VALUES('$user_id', '$product_name', '$product_price', '$product_image', '$product_quantity')") or die('query failed');
-        $message[] = 'product added to cart!';
+        mysqli_query($conn, "INSERT INTO `carrito`(idUsuario, nombre, precio, imagen, cantidad, fechaPedido) VALUES('$idUsuario', '$nombreLibro', '$precioLibro', '$imagenLibro', '$cantidadLibro', '$fechaPedido')") or die('query failed');
     }
 
 }
 ;
 
-if (isset($_POST['update_cart'])) {
-    $update_quantity = $_POST['cart_quantity'];
-    $update_id = $_POST['cart_id'];
-    mysqli_query($conn, "UPDATE `carrito` SET cantidad = '$update_quantity' WHERE id = '$update_id'") or die('query failed');
-    $message[] = 'cart quantity updated successfully!';
+if (isset($_POST['actualizarCarrito'])) {
+    $cantidadLibro = $_POST['cantidadLibro'];
+    $carritoId = $_POST['carritoId'];
+    mysqli_query($conn, "UPDATE `carrito` SET cantidad = '$cantidadLibro' WHERE id = '$carritoId'") or die('query failed');
 }
 
-if (isset($_GET['remove'])) {
-    $remove_id = $_GET['remove'];
-    mysqli_query($conn, "DELETE FROM `carrito` WHERE id = '$remove_id'") or die('query failed');
-    header('location:index.php');
+if (isset($_POST['eliminarLibro'])) {
+    $carritoId = $_POST['carritoId'];
+    mysqli_query($conn, "DELETE FROM `carrito` WHERE id = '$carritoId'") or die('query failed');
 }
 
-if (isset($_GET['delete_all'])) {
-    mysqli_query($conn, "DELETE FROM `carrito` WHERE idUsuario = '$user_id'") or die('query failed');
-    header('location:index.php');
+if (isset($_POST['eliminarTodo'])) {
+    mysqli_query($conn, "DELETE FROM `carrito` WHERE idUsuario = '$idUsuario'") or die('query failed');
 }
 ?>
 
@@ -99,58 +94,69 @@ if (isset($_GET['delete_all'])) {
                 </thead>
                 <tbody>
                     <?php
-                    $cart_query = mysqli_query($conn, "SELECT * FROM `carrito` WHERE idUsuario = '$user_id'") or die('query failed');
-                    $grand_total = 0;
-                    if (mysqli_num_rows($cart_query) > 0) {
-                        while ($fetch_cart = mysqli_fetch_assoc($cart_query)) {
+                    $sql = mysqli_query($conn, "SELECT * FROM `carrito` WHERE idUsuario = '$idUsuario'") or die('query failed');
+                    $total = 0;
+                    if (mysqli_num_rows($sql) > 0) {
+                        while ($resultado = mysqli_fetch_assoc($sql)) {
                             ?>
                             <tr>
-                                <td><img src="imagenes/<?php echo $fetch_cart['imagen']; ?>" height="100" alt=""></td>
+                                <td><img src="imagenes/<?php echo $resultado['imagen']; ?>" height="100" alt=""></td>
                                 <td>
-                                    <?php echo $fetch_cart['nombre']; ?>
+                                    <?php echo $resultado['nombre']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $fetch_cart['precio']; ?>€
+                                    <?php echo $resultado['precio']; ?>€
                                 </td>
                                 <td>
                                     <form action="" method="post">
-                                        <input type="hidden" name="cart_id" value="<?php echo $fetch_cart['id']; ?>">
-                                        <input type="number" min="1" name="cart_quantity"
-                                            value="<?php echo $fetch_cart['cantidad']; ?>">
-                                        <input type="submit" name="update_cart" value="Actualizar carrito"
+                                        <input type="hidden" name="carritoId" value="<?php echo $resultado['id']; ?>">
+                                        <input type="number" min="1" name="cantidadLibro"
+                                            value="<?php echo $resultado['cantidad']; ?>">
+                                        <input type="submit" name="actualizarCarrito" value="Actualizar carrito"
                                             class="btn btn-primary ">
                                     </form>
                                 </td>
                                 <td>
-                                    <?php echo $sub_total = ($fetch_cart['precio'] * $fetch_cart['cantidad']); ?>€
+                                    <?php echo $sub_total = ($resultado['precio'] * $resultado['cantidad']); ?>€
                                 </td>
-                                <td><a href="indexSesionIniciada.php?remove=<?php echo $fetch_cart['id']; ?>" class="delete-btn"
-                                        onclick="return confirm('¿Seguro que quiere borrar el producto del carrito??');">Eliminar
-                                        libro</a>
+                                <td>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="carritoId" value="<?php echo $resultado['id']; ?>">
+                                        <input type="submit" name="eliminarLibro" value="Borrar libro" class="btn btn-danger"
+                                            onclick="return confirm('¿Seguro que quiere borrar el producto del carrito?');">
+                                    </form>
                                 </td>
                             </tr>
                             <?php
-                            $grand_total += $sub_total;
+                            $total += $sub_total;
                         }
                     } else {
-                        echo '<tr><td style="padding:20px; text-transform:capitalize;" colspan="6">no item added</td></tr>';
+                        echo '<tr><td style="padding:20px; font-weight:bold; text-transform:capitalize;" colspan="6">NINGÚN LIBRO EN EL CARRITO</td></tr>';
                     }
                     ?>
                     <tr class="tablaAbajo">
                         <td colspan="4">Total :</td>
                         <td>
-                            <?php echo $grand_total; ?>€
+                            <?php echo $total; ?>€
                         </td>
-                        <td><a href="indexSesionIniciada.php?delete_all"
-                                onclick="return confirm('¿Seguro que quieres borrar todos los productos del carrito?');"
-                                class="delete-btn <?php echo ($grand_total > 1) ? '' : 'disabled'; ?>">Eliminar todo</a>
+                        <td>
+                            <form action="" method="post">
+                                <input type="hidden" name="carritoId" value="<?php echo $resultado['id']; ?>">
+                                <input type="submit" name="eliminarTodo" value="Eliminar todo" class="btn btn-warning"
+                                    onclick="return confirm('¿Seguro que quiere borrar todos los libros del carrito?');"
+                                    <?php echo ($total > 1) ? '' : 'disabled'; ?>>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
             <div class="botonCarrito">
-                <a href="#" class="btn <?php echo ($grand_total > 1) ? '' : 'deshabilitado'; ?>">Proceder al pago</a>
+                <button onclick="window.location.href='indexSesionIniciada.php'" class="btn btn-primary">
+                    Seguir comprando</button>
+                <button onclick="window.location.href='tramitarPedido.php'"
+                    class="btn btn-success <?php echo ($total > 1) ? '' : 'deshabilitado'; ?>">
+                    Proceder al pago</button>
             </div>
 
         </div>

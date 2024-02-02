@@ -242,6 +242,10 @@ input {
   color: black;
 }
 
+.container .carrito table tbody td img {
+  margin-bottom: 2rem;
+}
+
 .container .carrito table tr td:nth-child(1) {
   padding: 0;
 }
