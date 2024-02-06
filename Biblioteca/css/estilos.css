@@ -222,7 +222,9 @@ input {
 }
 
 .container .carrito table thead {
-  background-color: #ffffff;
+  background-color: #282424;
+  color: white;
+  font-weight: bold;
 }
 
 .container .carrito table thead th {
@@ -269,4 +271,24 @@ input {
   background-color: red;
   opacity: 0.5;
   user-select: none;
+}
+
+.ocultar {
+  display: none;
+}
+
+.table thead {
+  background-color: #282424;
+  color: white;
+  font-weight: bold;
+}
+
+.centrar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.centrar .btn {
+  margin: 1rem;
 }

@@ -21,7 +21,10 @@
                 <img class="logo" src="imagenes/logoBiblioteca-removebg-preview.png">
                 <li class="listasMenuTop"><a class="sinBarraVertical" href="indexSesionIniciada.php">Biblioteca</a></li>
                 <li class="listasMenuTop"><a class="enlacesMenuTop" href="insertarLibro.php">Libros</a></li>
+                <li class="listasMenuTop"><a class="enlacesMenuTop" href="usuario.php">Usuarios</a></li>
+
                 <?php
+                include "conectarBBDD.php";
                 session_start(); ?>
                 <li class="push-right">Bienvenido,
                     <i class="fa-solid fa-user"></i>
@@ -35,29 +38,29 @@
                     </li>
                 </div>
                 <div class="buscador">
-                    <form>
-                        <input type="text" placeholder="Buscar productos..." />
+                    <form id="form2" name="form2" method="POST" action="indexSesionIniciada.php">
+                        <input type="text" placeholder="Buscar libros..." name="buscar1" id="buscar1" />
+                        <input type="submit" class="btn btn-outline-light" value="Ver" name="buscar" id="buscar">
                     </form>
-                    <img class="lupa" src="imagenes/lupa-removebg-preview.png">
                 </div>
             </ul>
         </nav>
 
     </header>
     <div class="container">
+
         <div class="libros">
 
-            <h1 class="titulo">Últimos libros</h1>
+            <h1 <?php echo isset($_POST['buscar1']) ? 'class=ocultar' : 'class=titulo'; ?>>Últimos libros</h1>
 
-            <div class="contenedorLibros">
+            <div <?php echo isset($_POST['buscar1']) ? 'class=ocultar' : 'class=contenedorLibros'; ?>>
 
                 <?php
-                include "conectarBBDD.php";
                 $consulta = mysqli_query($conn, "SELECT * FROM libros");
                 if (mysqli_num_rows($consulta) > 0) {
                     while ($resultado = mysqli_fetch_assoc($consulta)) {
                         ?>
-                        <div class="cajaLibros">
+                        <div class="cajaLibros ">
                             <p class="nombre">
                                 <?php echo $resultado['descripcion']; ?>
                             </p>
@@ -98,8 +101,73 @@
                 ?>
             </div>
 
-        </div>
 
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['buscar1'])) {
+                $buscar = $_POST['buscar1'];
+
+                $sql = "SELECT * FROM libros WHERE 
+                            LOWER(autor) LIKE '%" . strtolower($buscar) . "%' OR 
+                            LOWER(descripcion) LIKE '%" . strtolower($buscar) . "%' OR 
+                            LOWER(fecha_publicacion) LIKE '%" . strtolower($buscar) . "%' OR 
+                            LOWER(genero) LIKE '%" . strtolower($buscar) . "%' OR 
+                            LOWER(editorial) LIKE '%" . strtolower($buscar) . "%'";
+                $resultadoConsulta = mysqli_query($conn, $sql);
+                $numResultados = mysqli_num_rows($resultadoConsulta);
+                ?>
+                <h1 style="text-align:center; margin-top: 2rem; margin-bottom: 2rem;"> Número de resultados (
+                    <?php echo $numResultados ?> )
+                </h1>
+                <div class="contenedorLibros">
+
+                    <?php
+                    while ($resultado = mysqli_fetch_assoc($resultadoConsulta)) {
+                        ?>
+
+
+                        <div class="cajaLibros">
+                            <p class="nombre">
+                                <?php echo $resultado['descripcion']; ?>
+                            </p>
+                            <img src="imagenes/<?php echo $resultado['imagen']; ?>" alt="" />
+                            <p class="autor">
+                                <strong>Autor:</strong>
+                                <?php echo $resultado['autor']; ?>
+                            </p>
+                            <p class="descripcion">
+                                <strong>Editorial:</strong>
+                                <?php echo $resultado['editorial']; ?>
+                            </p>
+                            <p class="descripcion">
+                                <strong> Género literario:</strong>
+                                <?php echo $resultado['genero']; ?>
+                            </p>
+                            <p class="descripcion">
+                                <strong>Fecha Publicación:</strong>
+                                <?php echo $resultado['fecha_publicacion']; ?>
+                            </p>
+                            <p class="precio">
+                                <?php echo $resultado['precio']; ?>€
+                            </p>
+                            <form action="carrito.php" method="post">
+                                <input type="number" min="1" name="cantidadLibro" value="1">
+                                <input type="hidden" name="imagenLibro" value="<?php echo $resultado['imagen']; ?>">
+                                <input type="hidden" name="nombreLibro" value="<?php echo $resultado['descripcion']; ?>">
+                                <input type="hidden" name="precioLibro" value="<?php echo $resultado['precio']; ?>">
+                                <div class="botones">
+                                    <input type="submit" class="btn btn-primary btn-lg" name="agregarCarrito"
+                                        value="Añadir al carrito">
+                                </div>
+                            </form>
+                        </div>
+
+                    <?php }
+
+            } ?>
+
+
+            </div>
+        </div>
     </div>
 
 </body>

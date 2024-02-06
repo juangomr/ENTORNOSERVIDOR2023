@@ -1,8 +1,8 @@
 <?php
 //Declaro mis constantes
+$errores = array();
 const EXTENSIONES = array(0 => 'image/jpg', 1 => 'image/jpeg', 2 => 'image/png');
 const MAX_TAMANYO = 1024 * 1024 * 8;
-
 $imagen = str_replace(" ", "-", $_FILES['imagen']['name']);
 $FILE = "c:/xampp/htdocs/entornoServidor/Biblioteca/validacion.php";
 $ruta_imagen = "http://localhost/entornoServidor/Biblioteca/imagenes/" . $imagen;
@@ -11,9 +11,12 @@ $ruta_fichero_origen = $_FILES['imagen']['tmp_name'];
 $ruta_nuevo_destino = $ruta_indexphp .
     '/imagenes/' . $imagen;
 move_uploaded_file($ruta_fichero_origen, $ruta_nuevo_destino);
-
-
-
+$autor = filtrado($_REQUEST['autor']);
+$descripcion = filtrado($_REQUEST['descripcion']);
+$precio = filtrado($_REQUEST['precio']);
+$editorial = filtrado($_REQUEST['editorial']);
+$fecha = filtrado($_REQUEST['fecha']);
+$genero = filtrado($_REQUEST['genero']);
 //Función que uso para filtrar los datos introducidos en el formulario
 function filtrado($datos)
 {
@@ -65,19 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_REQUEST['insertar'])) {
         }
     }
 }
-
 /*Bloque de código que comprueba si el array de errores está vacío, si es así,
  voy filtrando todos los datos introducidos en el */
 if (empty($errores)) {
-
-    $autor = filtrado($_REQUEST['autor']);
-    $descripcion = filtrado($_REQUEST['descripcion']);
-    $precio = filtrado($_REQUEST['precio']);
-    $editorial = filtrado($_REQUEST['editorial']);
-    $fecha = filtrado($_REQUEST['fecha']);
-    $genero = filtrado($_REQUEST['genero']);
-    //  $imagen = "<a href=$ruta_imagen target=_blank>" . $imagen . "</a>";
-
 
     include "conectarBBDD.php";
     $sql = "INSERT INTO libros (autor, descripcion, editorial, fecha_publicacion, genero, imagen, precio) VALUES ('$autor', '$descripcion', '$editorial', '$fecha', '$genero', '$imagen', '$precio')";
@@ -87,13 +80,30 @@ if (empty($errores)) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 
+    //  $imagen = "<a href=$ruta_imagen target=_blank>" . $imagen . "</a>";
 } else {
+
     foreach ($errores as $error) {
         echo "<li>$error</li>";
     }
     echo '<a href="insertar.php">Volver al formulario de inserción</a>';
 }
+include "conectarBBDD.php";
 
+
+//Paginación. Aquí se calcula el número de resultados por página
+// y la fila de inicio.
+$paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+$resultadosPorPagina = 5;
+$inicioFila = ($paginaActual - 1) * $resultadosPorPagina;
+
+/*Consulta SQL la primera para obtener el número total de 
+resultados y calcular el número total de páginas, y la segunda 
+para obtener los resultados paginados según el filtro aplicado.*/
+$query = "SELECT * FROM libros";
+$resultado = mysqli_query($conn, $query);
+$num_resultados_total = mysqli_num_rows($resultado);
+$num_paginas_total = ceil($num_resultados_total / $resultadosPorPagina);
 
 ?>
 
@@ -134,13 +144,13 @@ if (empty($errores)) {
 
     </header>
     <section>
-        <h1>Libros Existentes</h1>
+        <h1 style="text-align:center; margin-top: 2rem; margin-bottom: 2rem;">Libros Existentes</h1>
 
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Autor</th>
-                    <th scope="col">Descripción</th>
+                    <th scope="col">Nombre</th>
                     <th scope="col">Editorial</th>
                     <th scope="col">Fecha publicación</th>
                     <th scope="col">Género literario</th>
@@ -150,8 +160,7 @@ if (empty($errores)) {
             </thead>
             <tbody>
                 <?php
-                include "conectarBBDD.php";
-                $query = "SELECT * FROM libros";
+                $query = "SELECT * FROM libros LIMIT $inicioFila, $resultadosPorPagina";
                 $resultado = mysqli_query($conn, $query);
                 while ($fila = $resultado->fetch_assoc()) {
                     ?>
@@ -181,14 +190,47 @@ if (empty($errores)) {
                     </tr>
                     <?php
                 }
+
                 ?>
             </tbody>
         </table>
-        <button onclick="window.location.href='insertarLibro.php'" class="btn btn-success btn-lg">Nuevo
-            libro</button>
-        <button onclick="window.location.href='eliminarLibro.php'" class="btn btn-danger btn-lg">Eliminar
-            libro</button>
+        <div class="centrar">
+            <button onclick="window.location.href='insertarLibro.php'" class="btn btn-success btn-lg ">Nuevo
+                libro</button>
+            <button onclick="window.location.href='eliminarLibro.php'" class="btn btn-danger btn-lg ">Eliminar
+                libro</button>
+        </div>
     </section>
+    <?php
+    //Lógica de enlaces de paginación
+    if ($paginaActual == 1) {
+        $paginaSiguiente = $paginaActual + 1;
+        echo "<a href='?pagina=$paginaSiguiente'>[ Siguiente ]</a>";
+    }
+
+    if ($paginaActual > 1 && $paginaActual <= $num_paginas_total) {
+        $paginaAnterior = $paginaActual - 1;
+        $paginaSiguiente = $paginaActual + 1;
+
+        if ($paginaSiguiente) {
+
+            echo "<a href='?pagina=$paginaAnterior'>[ Anterior ]</a>";
+            echo "<a href='?pagina=$paginaSiguiente'>[ Siguiente ]</a>";
+        } else {
+            echo "<a href='?pagina=$paginaAnterior'>[ Anterior ]</a>";
+        }
+    }
+
+    if ($paginaActual > $num_paginas_total) {
+        $paginaAnterior = $paginaActual - 1;
+
+        echo "<a href='?pagina=$paginaAnterior'>[ Anterior ]</a>";
+        echo "No se encontraron resultados";
+
+    } else {
+        $paginaAnterior = $paginaActual - 1;
+    }
+    ?>
 </body>
 
 </html>

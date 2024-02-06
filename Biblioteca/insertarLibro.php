@@ -17,6 +17,24 @@ include "conectarBBDD.php";
 </head>
 
 <body>
+  <ul class="UlMenuTop">
+    <img class="logo" src="imagenes/logoBiblioteca-removebg-preview.png">
+    <li class="listasMenuTop"><a class="sinBarraVertical" href="index.php">Biblioteca</a></li>
+    <li class="listasMenuTop"><a class="enlacesMenuTop" href="insertarLibro.php">Libros</a></li>
+    <li class="listasMenuTop"><a class="enlacesMenuTop" href="usuario.php">Usuarios</a></li>
+
+    <li class="push-right"><a class="sinBarraVertical" href="inicioSesion.php">INICIAR SESION</a></li>
+    <li class="listasMenuTop"><a class="conBarraVerticalDerecha" href="registro.php">REGISTRARSE</a></li>
+    <div class="carro">
+      <img class="carrito" src="imagenes/carrito-removebg-preview.png">
+      <li class="listasMenuTop"><a class="sinBarraVertical" href="#">CARRITO (0)</a></li>
+    </div>
+    <div class="buscador">
+      <input type="text" placeholder="Buscar productos..." />
+      <img class="lupa" src="imagenes/lupa-removebg-preview.png">
+    </div>
+  </ul>
+
   <div class="main">
 
     <!--Formulario de inserción de libros -->
@@ -25,51 +43,42 @@ include "conectarBBDD.php";
 
       <div>
 
-        <label for="autor">Autor:</label><br>
         <input type="text" id="autor" name="autor" placeholder="Autor..." required />
 
       </div>
       <div>
-        <label for="descripcion">Descripción:</label><br>
-        <textarea id="descripcion" name="descripcion" rows="4" cols="50"
-          placeholder="Descripción del libro..."></textarea>
+        <input type="text" id="descripcion" name="descripcion" placeholder="Nombre del libro..."></input>
       </div>
       <div>
 
-        <label for="editorial">Editorial:</label><br>
         <input type="text" id="editorial" name="editorial" placeholder="Editorial..." required />
 
       </div>
       <div>
 
-        <label for="fecha">Fecha publicación:</label><br>
         <input type="date" id="fecha" name="fecha" placeholder="Fecha..." required />
 
       </div>
       <div>
 
-        <label for="genero">Género literario:</label><br>
         <input type="text" id="genero" name="genero" placeholder="Género..." required />
       </div>
 
 
-      <!--Campo para cargar la imagen-->
       <div>
-        <label for="imagen">Imagen:</label><br>
-        <input type="file" name="imagen" />
+
+        <input class="precio" type="number" id="precio" name="precio" placeholder="Precio del libro...€" required />
 
       </div>
+      <!--Campo para cargar la imagen-->
       <div>
-
-        <label for="precio">Precio:</label><br>
-        <input class="precio" type="number" id="precio" name="precio" placeholder="Precio del libro...€" required />
+        <input type="file" name="imagen" id="imagen" />
 
       </div>
 
       <!--Botones para enviar el formulario y volver al inicio -->
       <div>
-        <button onclick="window.location.href='index.php'" class="btn btn-warning btn-lg">Volver</button>
-        <input type="submit" value="Guardar" name="insertar" id="insertar" class="btn btn-success btn-lg" />
+        <input type="submit" value="Guardar" name="insertar" id="insertar" class="btn btn-success" />
       </div>
     </form>
   </div>

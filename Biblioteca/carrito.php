@@ -59,6 +59,8 @@ if (isset($_POST['eliminarTodo'])) {
                 <img class="logo" src="imagenes/logoBiblioteca-removebg-preview.png">
                 <li class="listasMenuTop"><a class="sinBarraVertical" href="indexSesionIniciada.php">Biblioteca</a></li>
                 <li class="listasMenuTop"><a class="enlacesMenuTop" href="insertarLibro.php">Libros</a></li>
+                <li class="listasMenuTop"><a class="enlacesMenuTop" href="usuario.php">Usuarios</a></li>
+
                 <li class="push-right">Bienvenido,
                     <i class="fa-solid fa-user"></i>
                     <?php echo $_SESSION['nombreUsuario'] ?>

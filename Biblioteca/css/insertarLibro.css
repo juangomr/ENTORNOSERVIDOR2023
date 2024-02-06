@@ -2,6 +2,8 @@ body {
   background-image: url("../imagenes/triangles_pattern.webp");
   background-repeat: repeat;
   background-attachment: fixed;
+  height: 100vh;
+  font-size: 1rem;
 }
 
 label {
@@ -9,11 +11,12 @@ label {
   text-align: left;
 }
 input {
-  margin-bottom: 1rem;
-}
-textarea {
-  overflow-y: scroll;
-  resize: none;
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 17px;
+  margin: 8px 0;
+  background: #eee;
+  border-radius: 5px;
 }
 
 .main {
@@ -26,12 +29,127 @@ textarea {
   font-style: italic;
   margin-bottom: 2rem;
   text-align: center;
+  margin-top: 1rem;
 }
 
 .precio {
   margin: 0;
 }
 
-.btn-success {
+.btn {
   margin-top: 1rem;
+}
+form {
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px solid black;
+  background: #fff;
+  width: 20%;
+  padding: 3rem;
+}
+
+.UlMenuTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+  padding-right: 3.5em;
+  padding-left: 3.5em;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1rem;
+  background-color: #282424;
+  height: 18vh;
+  margin: 0;
+}
+
+.push-right {
+  margin-left: auto;
+  list-style: none;
+  color: white;
+  font-style: italic;
+}
+
+.listasMenuTop {
+  list-style: none;
+}
+
+.enlacesMenuTop {
+  text-align: center;
+  text-decoration: none;
+  color: #8a8788;
+  border-left: 1px solid #8a8788;
+  padding-left: 1em;
+}
+
+.sinBarraVertical {
+  border-left: none;
+  text-decoration: none;
+  color: #8a8788;
+  cursor: pointer;
+}
+
+.conBarraVerticalDerecha {
+  text-decoration: none;
+  color: #8a8788;
+  border-right: 1px solid #8a8788;
+  border-left: 1px solid #8a8788;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.carrito {
+  width: 3em;
+  height: 3em;
+  position: relative;
+  outline: none;
+}
+
+.carro {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 9rem;
+  height: 9rem;
+}
+
+li a {
+  text-align: center;
+  text-decoration: none;
+  color: #8a8788;
+}
+
+li a:hover {
+  color: tomato;
+}
+.lupa {
+  width: 1em;
+  height: 1em;
+  position: relative;
+  margin-left: 0.5rem;
+}
+
+.buscador {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-direction: row;
+}
+
+.buscador input {
+  width: 100%;
+  font-size: 17px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #8a8788;
 }
