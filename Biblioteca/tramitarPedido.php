@@ -1,8 +1,9 @@
 <?php
 include "conectarBBDD.php";
 session_start();
-$idUsuario = $_SESSION['idUsuario']
-    ?>
+$idUsuario = $_SESSION['idUsuario'];
+$tipoUsuario = $_SESSION['tipoUsuario'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +53,21 @@ $idUsuario = $_SESSION['idUsuario']
                 </div>
                 <?php
             }
-        } ?>
-        <button onclick="window.location.href='indexSesionIniciada.php'" class="btn btn-primary btn-lg">
-            Volver a la Biblioteca</button>
+        }
+        if ($tipoUsuario == "Usuario") {
+            ?>
+
+
+            <button onclick="window.location.href='indexSesionIniciadaUsuario.php'" class="btn btn-primary btn-lg">
+                Volver a la Biblioteca</button>
+            <?php
+        } else {
+            ?>
+            <button onclick="window.location.href='indexSesionIniciadaAdmin.php'" class="btn btn-primary btn-lg">
+                Volver a la Biblioteca</button>
+            <?php
+        }
+        ?>
     </div>
 </body>
 

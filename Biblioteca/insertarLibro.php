@@ -19,18 +19,23 @@ include "conectarBBDD.php";
 <body>
   <ul class="UlMenuTop">
     <img class="logo" src="imagenes/logoBiblioteca-removebg-preview.png">
-    <li class="listasMenuTop"><a class="sinBarraVertical" href="index.php">Biblioteca</a></li>
-    <li class="listasMenuTop"><a class="enlacesMenuTop" href="insertarLibro.php">Libros</a></li>
+    <li class="listasMenuTop"><a class="sinBarraVertical" href="indexSesionIniciadaAdmin.php">Biblioteca</a></li>
+    <li class="listasMenuTop"><a class="enlacesMenuTop" href="Libros.php">Libros</a></li>
     <li class="listasMenuTop"><a class="enlacesMenuTop" href="usuario.php">Usuarios</a></li>
 
-    <li class="push-right"><a class="sinBarraVertical" href="inicioSesion.php">INICIAR SESION</a></li>
-    <li class="listasMenuTop"><a class="conBarraVerticalDerecha" href="registro.php">REGISTRARSE</a></li>
+    <?php
+    include "conectarBBDD.php";
+    session_start(); ?>
+    <li class="push-right">Bienvenido,
+      <i class="fa-solid fa-user"></i>
+      <?php echo $_SESSION['nombreAdmin'] ?>
+    </li>
     <div class="carro">
       <img class="carrito" src="imagenes/carrito-removebg-preview.png">
       <li class="listasMenuTop"><a class="sinBarraVertical" href="#">CARRITO (0)</a></li>
     </div>
     <div class="buscador">
-      <input type="text" placeholder="Buscar productos..." />
+      <input type="text" placeholder="Buscar libros..." />
       <img class="lupa" src="imagenes/lupa-removebg-preview.png">
     </div>
   </ul>

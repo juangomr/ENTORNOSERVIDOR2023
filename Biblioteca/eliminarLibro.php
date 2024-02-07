@@ -1,6 +1,27 @@
 <?php
 include "conectarBBDD.php";
 
+//Procesamiento de la eliminación de registros
+$filas_eliminadas = array();
+
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['eliminar'])) {
+    $ids_a_eliminar = $_POST['eliminar'];
+
+    foreach ($ids_a_eliminar as $id) {
+        // Obtén los datos de la fila antes de eliminarla
+        $query_obtener = "SELECT * FROM libros WHERE idLibro = $id";
+        $resultado_obtener = mysqli_query($conn, $query_obtener);
+        $fila_eliminada = mysqli_fetch_assoc($resultado_obtener);
+
+        if ($fila_eliminada !== null) {
+            $filas_eliminadas[] = $fila_eliminada;
+
+            // Elimina la fila de la base de datos
+            $query_eliminar = "DELETE FROM libros WHERE idLibro = $id";
+            mysqli_query($conn, $query_eliminar);
+        }
+    }
+}
 
 
 //Paginación. Aquí se calcula el número de resultados por página
@@ -9,8 +30,8 @@ $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 $resultadosPorPagina = 5;
 $inicioFila = ($paginaActual - 1) * $resultadosPorPagina;
 
-/*Consulta SQL la primera para obtener el número total de 
-resultados y calcular el número total de páginas, y la segunda 
+/*Consulta SQL la primera para obtener el número total de
+resultados y calcular el número total de páginas, y la segunda
 para obtener los resultados paginados según el filtro aplicado.*/
 $query = "SELECT * FROM libros";
 $resultado = mysqli_query($conn, $query);
@@ -47,7 +68,7 @@ $num_paginas_total = ceil($num_resultados_total / $resultadosPorPagina);
                 </div>
                 <div class="buscador">
                     <form>
-                        <input type="text" placeholder="Buscar productos..." />
+                        <input type="text" placeholder="Buscar libros..." />
                     </form>
                     <img class="lupa" src="imagenes/lupa-removebg-preview.png">
                 </div>

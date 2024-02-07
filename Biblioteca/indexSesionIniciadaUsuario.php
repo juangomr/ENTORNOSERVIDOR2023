@@ -19,9 +19,9 @@
         <nav>
             <ul class="UlMenuTop ">
                 <img class="logo" src="imagenes/logoBiblioteca-removebg-preview.png">
-                <li class="listasMenuTop"><a class="sinBarraVertical" href="indexSesionIniciada.php">Biblioteca</a></li>
-                <li class="listasMenuTop"><a class="enlacesMenuTop" href="insertarLibro.php">Libros</a></li>
-                <li class="listasMenuTop"><a class="enlacesMenuTop" href="usuario.php">Usuarios</a></li>
+                <li class="listasMenuTop"><a class="sinBarraVertical"
+                        href="indexSesionIniciadaUsuario.php">Biblioteca</a></li>
+
 
                 <?php
                 include "conectarBBDD.php";
@@ -38,7 +38,7 @@
                     </li>
                 </div>
                 <div class="buscador">
-                    <form id="form2" name="form2" method="POST" action="indexSesionIniciada.php">
+                    <form id="form2" name="form2" method="POST" action="indexSesionIniciadaUsuario.php">
                         <input type="text" placeholder="Buscar libros..." name="buscar1" id="buscar1" />
                         <input type="submit" class="btn btn-outline-light" value="Ver" name="buscar" id="buscar">
                     </form>
