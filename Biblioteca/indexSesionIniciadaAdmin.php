@@ -1,3 +1,21 @@
+<?php
+include "conectarBBDD.php";
+//Paginación. Aquí se calcula el número de resultados por página
+// y la fila de inicio.
+$paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+$resultadosPorPagina = 10;
+$inicioFila = ($paginaActual - 1) * $resultadosPorPagina;
+
+/*Consulta SQL la primera para obtener el número total de
+resultados y calcular el número total de páginas, y la segunda
+para obtener los resultados paginados según el filtro aplicado.*/
+$query = "SELECT * FROM libros";
+$resultado = mysqli_query($conn, $query);
+$num_resultados_total = mysqli_num_rows($resultado);
+$num_paginas_total = ceil($num_resultados_total / $resultadosPorPagina);
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -56,7 +74,7 @@
 
             <div <?php echo isset($_POST['buscar1']) ? 'class=ocultar' : 'class=contenedorLibros'; ?>>
                 <?php
-                $consulta = mysqli_query($conn, "SELECT * FROM libros");
+                $consulta = mysqli_query($conn, "SELECT * FROM libros LIMIT $inicioFila, $resultadosPorPagina");
                 if (mysqli_num_rows($consulta) > 0) {
                     while ($resultado = mysqli_fetch_assoc($consulta)) {
                         ?>
@@ -108,11 +126,11 @@
                 $buscar = $_POST['buscar1'];
 
                 $sql = "SELECT * FROM libros WHERE 
-                            LOWER(autor) LIKE '%" . strtolower($buscar) . "%' OR 
-                            LOWER(descripcion) LIKE '%" . strtolower($buscar) . "%' OR 
-                            LOWER(fecha_publicacion) LIKE '%" . strtolower($buscar) . "%' OR 
-                            LOWER(genero) LIKE '%" . strtolower($buscar) . "%' OR 
-                            LOWER(editorial) LIKE '%" . strtolower($buscar) . "%'";
+                LOWER(autor) LIKE '%" . strtolower($buscar) . "%' OR 
+                LOWER(descripcion) LIKE '%" . strtolower($buscar) . "%' OR 
+                LOWER(fecha_publicacion) LIKE '%" . strtolower($buscar) . "%' OR 
+                LOWER(genero) LIKE '%" . strtolower($buscar) . "%' OR 
+                LOWER(editorial) LIKE '%" . strtolower($buscar) . "%' LIMIT $inicioFila, $resultadosPorPagina";
                 $resultadoConsulta = mysqli_query($conn, $sql);
                 $numResultados = mysqli_num_rows($resultadoConsulta);
                 ?>
@@ -170,5 +188,60 @@
             </div>
         </div>
     </div>
+    <?php
+    //Lógica de enlaces de paginación
+    if ($paginaActual == 1) {
+        $paginaSiguiente = $paginaActual + 1;
 
+        ?>
+        <div class="centrar">
+            <button onclick="window.location.href='indexSesionIniciadaAdmin.php?pagina=<?php echo $paginaSiguiente ?>'"
+                class="btn btn-primary btn-lg ">Siguiente</button>
+        </div>
+        <?php
+    }
+
+
+    if ($paginaActual > 1 && $paginaActual <= $num_paginas_total) {
+        $paginaAnterior = $paginaActual - 1;
+        $paginaSiguiente = $paginaActual + 1;
+        if ($paginaSiguiente) {
+
+            ?>
+            <div class="centrar">
+                <button onclick="window.location.href='indexSesionIniciadaAdmin.php?pagina=<?php echo $paginaAnterior ?>'"
+                    class="btn btn-primary btn-lg ">Anterior</button>
+
+                <button onclick="window.location.href='indexSesionIniciadaAdmin.php?pagina=<?php echo $paginaSiguiente ?>'"
+                    class="btn btn-primary btn-lg ">Siguiente</button>
+            </div>
+            <?php
+
+        } else {
+            ?>
+            <div class="centrar">
+                <button onclick="window.location.href='indexSesionIniciadaAdmin.php?pagina=<?php echo $paginaAnterior ?>'"
+                    class="btn btn-primary btn-lg ">Anterior</button>
+            </div>
+            <?php
+        }
+    }
+
+    if (
+        $paginaActual >
+        $num_paginas_total
+    ) {
+        $paginaAnterior = $paginaActual - 1;
+        ?>
+        <div class="centrar">
+            <button onclick="window.location.href='indexSesionIniciadaAdmin.php?pagina=<?php echo $paginaAnterior ?>'"
+                class="btn btn-primary btn-lg ">Anterior</button>
+            <h3>No se encontraron resultados</h3>
+        </div>
+        <?php
+    } else {
+        $paginaAnterior = $paginaActual - 1;
+    }
+    mysqli_close($conn);
+    ?>
 </body>

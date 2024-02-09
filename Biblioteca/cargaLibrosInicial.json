@@ -1,0 +1,362 @@
+[
+  {
+    "descripcion": "Cien años de soledad",
+    "autor": "Gabriel García Márquez",
+    "genero": "Realismo mágico",
+    "editorial": "Alfaguara",
+    "fecha_publicacion": "2022-01-02",
+    "precio": 19.99,
+    "imagen": "A1lNJP8sC6L._AC_UF894,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "1984",
+    "autor": "George Orwell",
+    "genero": "Distopía",
+    "editorial": "Anagrama",
+    "fecha_publicacion": "2020-01-02",
+    "precio": 16.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "Orgullo y prejuicio",
+    "autor": "Jane Austen",
+    "genero": "Novela romántica",
+    "editorial": "Ariel",
+    "fecha_publicacion": "2022-01-01",
+    "precio": 13.99,
+    "imagen": "orgullo_y_prejuicio.jpg"
+  },
+  {
+    "descripcion": "El señor de los anillos",
+    "autor": "J.R.R. Tolkien",
+    "genero": "Fantasía épica",
+    "editorial": "Austral",
+    "fecha_publicacion": "1992-01-02",
+    "precio": 7.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "Matar a un ruiseñor",
+    "autor": "Harper Lee",
+    "genero": "Ficción clásica",
+    "editorial": "Ediciones B",
+    "fecha_publicacion": "1999-01-02",
+    "precio": 9.99,
+    "imagen": "30919655837.jpg"
+  },
+  {
+    "descripcion": "En el camino",
+    "autor": "Jack Kerouac",
+    "genero": "Generación Beat",
+    "editorial": "Blackie Books",
+    "fecha_publicacion": "1988-01-02",
+    "precio": 8.99,
+    "imagen": "814DLfqk2hL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "Crónica de una muerte anunciada",
+    "autor": "Gabriel García Márquez",
+    "genero": "Ficción latinoamericana",
+    "editorial": "Siruela",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 19.99,
+    "imagen": "71q9eAPZnIL._AC_UF894,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "Harry Potter y la piedra filosofal",
+    "autor": "J.K. Rowling",
+    "genero": "Fantasía juvenil",
+    "editorial": "Ediciones Luminar",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 19.99,
+    "imagen": "91R1AixEiLL._AC_UF894,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "Don Quijote de la Mancha",
+    "autor": "Miguel de Cervantes",
+    "genero": "Novela satírica",
+    "editorial": "Editorial Nova Letra",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 6.99,
+    "imagen": "16367420047732-removebg-preview.png"
+  },
+  {
+    "descripcion": "Rayuela",
+    "autor": "Julio Cortázar",
+    "genero": "Experimental",
+    "editorial": "Libros del Horizonte",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 15.99,
+    "imagen": "51rfw1t2F4L._SL500_.jpg"
+  },
+  {
+    "descripcion": "El Gran Gatsby",
+    "autor": "F. Scott Fitzgerald",
+    "genero": "Ficción modernista",
+    "editorial": "Páginas Doradas",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 5.55,
+    "imagen": "61zzb6XgKKL._AC_UF1000_1000_QL80_-removebg-preview.png"
+  },
+  {
+    "descripcion": "Crimen y castigo",
+    "autor": "Fyodor Dostoevsky",
+    "genero": "Novela psicológica",
+    "editorial": "Editorial Épica",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 4.99,
+    "imagen": "61zzb6XgKKL._AC_UF1000_1000_QL80_-removebg-preview.png"
+  },
+  {
+    "descripcion": "El retrato de Dorian Gray",
+    "autor": "Oscar Wilde",
+    "genero": "Novela gótica",
+    "editorial": "Letras Esmeralda",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 17.99,
+    "imagen": "42464-hypp15nz-libro-el-corazon-helado-almudena-grandes-5-removebg-preview.png"
+  },
+  {
+    "descripcion": "Anna Karenina",
+    "autor": "Leo Tolstoy",
+    "genero": "Realismo",
+    "editorial": "HarperCollins",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 16.99,
+    "imagen": "42464-hypp15nz-libro-el-corazon-helado-almudena-grandes-5-removebg-preview.png"
+  },
+  {
+    "descripcion": "Los juegos del hambre",
+    "autor": "Suzanne Collins",
+    "genero": "Ciencia ficción",
+    "editorial": "Wiley",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 19.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "El código Da Vinci",
+    "autor": "Dan Brown",
+    "genero": "Thriller",
+    "editorial": "Pearson",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 19.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "La sombra del viento",
+    "autor": "Carlos Ruiz Zafón",
+    "genero": "Novela histórica",
+    "editorial": "Springer",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 5.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "El alquimista",
+    "autor": "Paulo Coelho",
+    "genero": "Ficción filosófica",
+    "editorial": "Routledge",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 8.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "Mujer en punto cero",
+    "autor": "Nawal El Saadawi",
+    "genero": "Feminismo",
+    "editorial": "Elsevier",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 7.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "Sapiens: De animales a dioses",
+    "autor": "Yuval Noah Harari",
+    "genero": "Divulgación histórica",
+    "editorial": "MIT Press",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 6.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "El nombre de la rosa",
+    "autor": "Umberto Eco",
+    "genero": "Novela histórica",
+    "editorial": "Palgrave Macmillan",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 12.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "Frankenstein",
+    "autor": "Mary Shelley",
+    "genero": "Novela gótica",
+    "editorial": "Planeta",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 11.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "El principito",
+    "autor": "Antoine de Saint-Exupéry",
+    "genero": "Literatura infantil",
+    "editorial": "Espasa",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 6.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "Un mundo feliz",
+    "autor": "Aldous Huxley",
+    "genero": "Ciencia ficción distópica",
+    "editorial": "Salamandra",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 7.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "Matadero cinco",
+    "autor": "Kurt Vonnegut",
+    "genero": "Ciencia ficción satírica",
+    "editorial": "Salamandra",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 19.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "El hobbit",
+    "autor": "J.R.R. Tolkien",
+    "genero": "Fantasía juvenil",
+    "editorial": "Salamandra",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 19.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "El cuaderno dorado",
+    "autor": "Doris Lessing",
+    "genero": "Novela feminista",
+    "editorial": "Editorial Juventud",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 19.99,
+    "imagen": "81StSOpmkjL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "descripcion": "Ensayo sobre la ceguera",
+    "autor": "José Saramago",
+    "genero": "Ficción distópica",
+    "editorial": "Editorial Juventud",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 7.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "El perfume",
+    "autor": "Patrick Süskind",
+    "genero": "Novela histórica",
+    "editorial": "Editorial Juventud",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 19.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "El cuento de la criada",
+    "autor": "Margaret Atwood",
+    "genero": "Ficción especulativa",
+    "editorial": "Editorial Ariel",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 19.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "La Odisea",
+    "autor": "Homero",
+    "genero": "Epopeya",
+    "editorial": "Editorial Ariel",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 7.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "El lobo estepario",
+    "autor": "Hermann Hesse",
+    "genero": "Novela psicológica",
+    "editorial": "Editorial Ariel",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 8.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "La insoportable levedad del ser",
+    "autor": "Milan Kundera",
+    "genero": "Ficción filosófica",
+    "editorial": "Editorial Ariel",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 6.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "El arte de amar",
+    "autor": "Erich Fromm",
+    "genero": "Ensayo",
+    "editorial": "Editorial Ariel",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 13.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "La naranja mecánica",
+    "autor": "Anthony Burgess",
+    "genero": "Ficción distópica",
+    "editorial": "Ediciones Grijalbo",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 14.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "La ciudad y los perros",
+    "autor": "Mario Vargas Llosa",
+    "genero": "Novela militar",
+    "editorial": "Ediciones Grijalbo",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 15.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "El silencio de los corderos",
+    "autor": "Thomas Harris",
+    "genero": "Thriller psicológico",
+    "editorial": "Ediciones Grijalbo",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 16.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "El viejo y el mar",
+    "autor": "Ernest Hemingway",
+    "genero": "Novela marina",
+    "editorial": "Ediciones Grijalbo",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 19.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "La metamorfosis",
+    "autor": "Franz Kafka",
+    "genero": "Novela corta",
+    "editorial": "Editorial Milenio",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 7.99,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  },
+  {
+    "descripcion": "Cien sonetos de amor",
+    "autor": "Pablo Neruda",
+    "genero": "8",
+    "editorial": "Editorial Milenio",
+    "fecha_publicacion": "1995-01-01",
+    "precio": 8,
+    "imagen": "_visd_0000JPG02Q3B.jpg"
+  }
+]
