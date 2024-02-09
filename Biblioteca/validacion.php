@@ -147,7 +147,6 @@ if (empty($errores)) {
         <?php
     }
 
-    //  $imagen = "<a href=$ruta_imagen target=_blank>" . $imagen . "</a>";
 } else {
     ?>
     <!DOCTYPE html>
